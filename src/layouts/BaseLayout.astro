@@ -2,7 +2,29 @@
 import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
-import { navLinks as defaultNav } from '../data/site';
+import { navLinks as defaultNav, contact, emails } from '../data/site';
+import { units, ecosystem } from '../data/units';
+import { streamPrograms } from '../data/streamPrograms';
+
+const defaultColumns = [
+  { title: 'Unidades', links: units.filter((u) => u.slug !== 'stream').map((u) => ({ label: u.name, href: u.href })) },
+  {
+    title: 'Stream',
+    links: [{ label: 'Todo el Stream', href: '/stream' }, ...streamPrograms.map((p) => ({ label: p.name, href: `/stream/${p.slug}` }))],
+  },
+  {
+    title: 'Contacto',
+    links: [
+      { label: contact.phoneDisplay, href: contact.phoneHref },
+      { label: 'WhatsApp', href: contact.whatsappHref },
+      ...emails.map((e) => ({ label: `${e.label}: ${e.email}`, href: `mailto:${e.email}` })),
+      { label: 'Formulario de contacto', href: '/contacto' },
+    ],
+  },
+];
+const defaultMarks = [...units.map((u) => ({ src: u.logo, alt: u.name })), ...ecosystem.map((e) => ({ src: e.logo, alt: e.name }))].filter(
+  (m, i, a) => a.findIndex((x) => x.src === m.src) === i,
+);
 
 interface Props {
   title: string;
@@ -22,8 +44,8 @@ const {
   active,
   cta = 'Agendá una reunión',
   ctaHref = '/contacto',
-  footerColumns = [],
-  footerMarks = [],
+  footerColumns = defaultColumns,
+  footerMarks = defaultMarks,
 } = Astro.props;
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
