@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 interface Props {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
@@ -23,7 +24,7 @@ const Element = href && !disabled ? 'a' : 'button';
 ---
 
 <Element
-  href={Element === 'a' ? href : undefined}
+  href={Element === 'a' && href ? withBase(href) : undefined}
   type={Element === 'button' ? type : undefined}
   disabled={Element === 'button' ? disabled : undefined}
   aria-disabled={disabled ? 'true' : undefined}

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
 import Tag from '../components/core/Tag.astro';
@@ -36,7 +37,7 @@ const unit = unitBySlug('coworking');
       {
         rooms.map((r) => (
           <article class="room" id={r.id}>
-            <img src={r.image} alt={r.imageAlt} loading="lazy" />
+            <img src={withBase(r.image)} alt={r.imageAlt} loading="lazy" />
             <div class="room-body">
               <h3>{r.name}</h3>
               {r.capacity && <p class="capacity">Capacidad: {r.capacity}</p>}
@@ -72,7 +73,7 @@ const unit = unitBySlug('coworking');
       {
         equipment.map((e) => (
           <li>
-            <img src={e.src} alt={e.alt} loading="lazy" />
+            <img src={withBase(e.src)} alt={e.alt} loading="lazy" />
             <span>{e.caption}</span>
           </li>
         ))

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/core/Button.astro';
 import ContactBlock from '../../components/marketing/ContactBlock.astro';
@@ -24,7 +25,7 @@ const unit = unitBySlug('stream');
   <Section background="sky" labelledby="program-title">
     <div class="intro">
       <div class="copy">
-        <a class="back" href="/stream">← Todo el Stream</a>
+        <a class="back" href={withBase("/stream")}>← Todo el Stream</a>
         <div class="bar" style={`background:${program.accent}`} aria-hidden="true"></div>
         <h1 id="program-title">{program.name}</h1>
         <p class="tagline">{program.tagline}</p>
@@ -37,7 +38,7 @@ const unit = unitBySlug('stream');
           {program.instagram && <Button href={program.instagram} variant="secondary">Ver en Instagram</Button>}
         </div>
       </div>
-      {program.banner && <img src={program.banner} alt={program.bannerAlt ?? program.name} />}
+      {program.banner && <img src={withBase(program.banner)} alt={program.bannerAlt ?? program.name} />}
     </div>
   </Section>
 

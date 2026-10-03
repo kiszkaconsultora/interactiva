@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 interface Props {
   href: string;
   name: string;
@@ -12,12 +13,12 @@ interface Props {
 const { href, name, kicker, description, logo, image, accent = 'var(--ink-0)', cta = 'Conocer' } = Astro.props;
 ---
 
-<a class="card" href={href} style={`--accent:${accent}`}>
-  {image && <div class="photo"><img src={image} alt="" /></div>}
+<a class="card" href={withBase(href)} style={`--accent:${accent}`}>
+  {image && <div class="photo"><img src={withBase(image)} alt="" /></div>}
   <div class="bar"></div>
   <div class="body">
     <div class="head">
-      {logo && <img class="logo" src={logo} alt="" />}
+      {logo && <img class="logo" src={withBase(logo)} alt="" />}
       {kicker && <div class="kicker">{kicker}</div>}
     </div>
     <div class="name">{name}</div>

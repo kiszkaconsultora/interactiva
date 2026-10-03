@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
 import ContactBlock from '../components/marketing/ContactBlock.astro';
@@ -95,7 +96,7 @@ const institutional = [
 
   <Section labelledby="perfil-title">
     <div class="profile">
-      <img src="/images/kiszka/retrato.webp" alt="Retrato circular de la directora ejecutiva de Kiszka Consultora" loading="lazy" />
+      <img src={withBase("/images/kiszka/retrato.webp")} alt="Retrato circular de la directora ejecutiva de Kiszka Consultora" loading="lazy" />
       <div class="profile-copy">
         <div id="perfil-title">
           <SectionHeading
@@ -143,7 +144,7 @@ const institutional = [
     <div id="servicios-title"><SectionHeading eyebrow="Servicios" title="Servicios Kiszka" accent={unit.solid} /></div>
     <ul class="cards">
       {services.map((s) => (
-        <li><h3>{s.name}</h3><p>{s.text}</p><a href={s.href}>Conocé más →</a></li>
+        <li><h3>{s.name}</h3><p>{s.text}</p><a href={withBase(s.href)}>Conocé más →</a></li>
       ))}
     </ul>
   </Section>
@@ -152,7 +153,7 @@ const institutional = [
     <div id="coord-title"><SectionHeading eyebrow="Programas" title="Coordinación Kiszka" accent={unit.solid} /></div>
     <ul class="cards">
       {coordination.map((s) => (
-        <li id={s.id}><h3>{s.name}</h3><p>{s.text}</p><a href={s.href}>Conocé más →</a></li>
+        <li id={s.id}><h3>{s.name}</h3><p>{s.text}</p><a href={withBase(s.href)}>Conocé más →</a></li>
       ))}
     </ul>
   </Section>
@@ -164,7 +165,7 @@ const institutional = [
         <li>
           <h3>{s.name}</h3>
           <p>{s.text}</p>
-          {s.href && <a href={s.href}>Conocé más →</a>}
+          {s.href && <a href={withBase(s.href)}>Conocé más →</a>}
         </li>
       ))}
     </ul>

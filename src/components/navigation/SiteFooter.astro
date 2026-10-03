@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 interface Props {
   address?: string;
   hours?: string;
@@ -30,7 +31,7 @@ const {
         <div>
           <div class="col-title">{c.title}</div>
           {c.links.map((l) => (
-            <div class="col-link"><a href={l.href}>{l.label}</a></div>
+            <div class="col-link"><a href={withBase(l.href)}>{l.label}</a></div>
           ))}
         </div>
       ))
@@ -39,7 +40,7 @@ const {
   {
     marks.length > 0 && (
       <div class="marks">
-        {marks.map((m) => <img src={m.src} alt={m.alt ?? ''} />)}
+        {marks.map((m) => <img src={withBase(m.src)} alt={m.alt ?? ''} />)}
       </div>
     )
   }

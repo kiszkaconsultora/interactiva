@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
 import Tag from '../components/core/Tag.astro';
@@ -71,7 +72,7 @@ import { contact, nasaImages } from '../data/site';
     <div class="ecosystem">
       <div class="eco-label">Ecosistema</div>
       <ul>
-        {ecosystem.map((e) => <li><img src={e.logo} alt={e.name} loading="lazy" /></li>)}
+        {ecosystem.map((e) => <li><img src={withBase(e.logo)} alt={e.name} loading="lazy" /></li>)}
       </ul>
     </div>
   </Section>
@@ -97,9 +98,9 @@ import { contact, nasaImages } from '../data/site';
   <Section labelledby="espacio-title">
     <div class="space">
       <div class="photos">
-        <img class="big" src="/images/coworking/sala-sinergia.webp" alt="Sala Sinergia: espacio tipo loft con mesa y plantas" loading="lazy" />
-        <img src="/images/coworking/sillas-y-mesas.webp" alt="Sillas y mesas dispuestas para 30 asistentes" loading="lazy" />
-        <img src="/images/coworking/cocina-equipada.webp" alt="Cocina equipada del coworking" loading="lazy" />
+        <img class="big" src={withBase("/images/coworking/sala-sinergia.webp")} alt="Sala Sinergia: espacio tipo loft con mesa y plantas" loading="lazy" />
+        <img src={withBase("/images/coworking/sillas-y-mesas.webp")} alt="Sillas y mesas dispuestas para 30 asistentes" loading="lazy" />
+        <img src={withBase("/images/coworking/cocina-equipada.webp")} alt="Cocina equipada del coworking" loading="lazy" />
       </div>
       <div class="space-copy">
         <div id="espacio-title">

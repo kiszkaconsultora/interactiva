@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
 import ContactBlock from '../components/marketing/ContactBlock.astro';
@@ -62,7 +63,7 @@ const services = [
           <li>Tiempo considerado del episodio una hora, 50 minutos de aire.</li>
         </ul>
       </div>
-      <img src="/images/productora/hero.webp" alt="Rostro con efecto de glitch sobre una franja del horizonte de una ciudad" loading="lazy" />
+      <img src={withBase("/images/productora/hero.webp")} alt="Rostro con efecto de glitch sobre una franja del horizonte de una ciudad" loading="lazy" />
     </div>
   </Section>
 
@@ -89,7 +90,7 @@ const services = [
       {
         services.map((s) => (
           <li>
-            <img src={s.image} alt={s.alt} loading="lazy" />
+            <img src={withBase(s.image)} alt={s.alt} loading="lazy" />
             <div class="body">
               <h3>{s.name}</h3>
               {s.price && <div class="price">{s.price}</div>}

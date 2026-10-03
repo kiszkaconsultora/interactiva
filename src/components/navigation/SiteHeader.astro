@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/url';
 interface Props {
   links?: { label: string; href: string }[];
   active?: string;
@@ -11,7 +12,7 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
 ---
 
 <header class="header" data-inverse={inverse ? 'true' : undefined}>
-  <a class="brand" href={homeHref}><span class="word">interactiva</span><span class="hub">hub</span></a>
+  <a class="brand" href={withBase(homeHref)}><span class="word">interactiva</span><span class="hub">hub</span></a>
   <button
     class="toggle"
     type="button"
@@ -26,13 +27,13 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
     <nav class="nav" aria-label="Principal">
       {
         links.map((l) => (
-          <a href={l.href} class="link" data-on={l.label === active || l.href === active ? 'true' : undefined} aria-current={l.label === active || l.href === active ? 'page' : undefined}>
+          <a href={withBase(l.href)} class="link" data-on={l.label === active || l.href === active ? 'true' : undefined} aria-current={l.label === active || l.href === active ? 'page' : undefined}>
             {l.label}
           </a>
         ))
       }
     </nav>
-    <a class="cta" href={ctaHref}>{cta}</a>
+    <a class="cta" href={withBase(ctaHref)}>{cta}</a>
   </div>
 </header>
 

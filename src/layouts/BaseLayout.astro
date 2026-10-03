@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
+import { stripBase } from '../utils/url';
 import { navLinks as defaultNav, contact, emails } from '../data/site';
 import { units, ecosystem } from '../data/units';
 import { streamPrograms } from '../data/streamPrograms';
@@ -48,7 +49,7 @@ const {
   footerMarks = defaultMarks,
 } = Astro.props;
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
 const current =
   active ??
   navLinks.find((l) => (l.href === '/' ? path === '/' : path === l.href || path.startsWith(l.href + '/')))?.href;

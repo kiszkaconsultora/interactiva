@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
 import ContactBlock from '../components/marketing/ContactBlock.astro';
@@ -77,8 +78,8 @@ const labs = [
       {
         dimensions.map((d) => (
           <li>
-            <video autoplay muted loop playsinline preload="metadata" poster={d.poster} aria-label={`Animación: ${d.name}`}>
-              <source src={d.video} type="video/mp4" />
+            <video autoplay muted loop playsinline preload="metadata" poster={withBase(d.poster)} aria-label={`Animación: ${d.name}`}>
+              <source src={withBase(d.video)} type="video/mp4" />
             </video>
             <h3>{d.name}</h3>
             <p>{d.text}</p>
@@ -102,8 +103,8 @@ const labs = [
           }
         </div>
       </div>
-      <video autoplay muted loop playsinline preload="metadata" poster="/video/consultoria-de-diseno.jpg" aria-label="Animación: consultoría de diseño">
-        <source src="/video/consultoria-de-diseno.mp4" type="video/mp4" />
+      <video autoplay muted loop playsinline preload="metadata" poster={withBase("/video/consultoria-de-diseno.jpg")} aria-label="Animación: consultoría de diseño">
+        <source src={withBase("/video/consultoria-de-diseno.mp4")} type="video/mp4" />
       </video>
     </div>
   </Section>
@@ -122,7 +123,7 @@ const labs = [
         <p>Los proyectos en nuestro medio se llevan a cabo por distintos agentes: profesionales, técnicos, comerciantes y apasionados.</p>
         <div><Button href={form} iconRight="→">¡Quiero Sesionar!</Button></div>
       </div>
-      <img src="/images/sesiones/mesa-de-consultoria.webp" alt="Mesa de reunión vista desde arriba, con café y papeles" loading="lazy" />
+      <img src={withBase("/images/sesiones/mesa-de-consultoria.webp")} alt="Mesa de reunión vista desde arriba, con café y papeles" loading="lazy" />
     </div>
   </Section>
 
@@ -144,7 +145,7 @@ const labs = [
       {
         disciplines.map((d) => (
           <li>
-            <img src={d.image} alt={d.alt} loading="lazy" />
+            <img src={withBase(d.image)} alt={d.alt} loading="lazy" />
             <h3>{d.name}</h3>
           </li>
         ))
@@ -160,8 +161,8 @@ const labs = [
       {
         labs.map((l) => (
           <li>
-            <img src={l.image} alt={l.alt} loading="lazy" />
-            {l.href ? <a href={l.href}>{l.caption} →</a> : <p>{l.caption}</p>}
+            <img src={withBase(l.image)} alt={l.alt} loading="lazy" />
+            {l.href ? <a href={withBase(l.href)}>{l.caption} →</a> : <p>{l.caption}</p>}
           </li>
         ))
       }
