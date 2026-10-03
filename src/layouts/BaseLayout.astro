@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
-import { stripBase } from '../utils/url';
+import { stripBase, withBase } from '../utils/url';
 import { navLinks as defaultNav, contact, emails } from '../data/site';
 import { units, ecosystem } from '../data/units';
 import { streamPrograms } from '../data/streamPrograms';
@@ -67,6 +67,7 @@ const current =
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="icon" type="image/x-icon" href={withBase('/favicon.ico')} />
     <title>{title}</title>
   </head>
   <body>

@@ -11,6 +11,7 @@ export interface StreamProgram {
   bannerAlt?: string;
   videosHeading: string;
   youtube?: string;
+  playlistId?: string;
   instagram?: string;
   email?: string;
   accent: string;
@@ -43,8 +44,9 @@ export const streamPrograms: StreamProgram[] = [
     ],
     banner: '/images/stream/desafio-emprendedor.webp',
     bannerAlt: 'Desafío Emprendedor @Interactiva Hub',
-    videosHeading: 'Temporada 2',
+    videosHeading: 'Playlist',
     youtube: playlist('PLUeXZGb57lcltcTEjqFsolRImfoVjNLlF'),
+    playlistId: 'PLUeXZGb57lcltcTEjqFsolRImfoVjNLlF',
     instagram: 'https://www.instagram.com/desafioemprendedor.ok',
     email: 'desafioemprendedor.ok@gmail.com',
     accent: 'var(--stream-2)',
@@ -62,8 +64,9 @@ export const streamPrograms: StreamProgram[] = [
     ],
     banner: '/images/stream/error-404.webp',
     bannerAlt: 'Error 404 Stream',
-    videosHeading: 'Nuestros Episodios',
+    videosHeading: 'Playlist',
     youtube: playlist('PLUeXZGb57lcksrerelUgn_ljNFIXNIK0G'),
+    playlistId: 'PLUeXZGb57lcksrerelUgn_ljNFIXNIK0G',
     instagram: 'https://www.instagram.com/error404.stream',
     email: 'error404stream.ok@gmail.com',
     accent: 'var(--stream-1)',
@@ -97,7 +100,9 @@ export const streamPrograms: StreamProgram[] = [
     ],
     banner: '/images/stream/magia.webp',
     bannerAlt: 'magIA Tecnología 5.0',
-    videosHeading: 'Episodios',
+    videosHeading: 'Playlist',
+    youtube: playlist('PLUeXZGb57lcnc8BvIuQ6OAFabuJZGzGCn'),
+    playlistId: 'PLUeXZGb57lcnc8BvIuQ6OAFabuJZGzGCn',
     instagram: 'https://www.instagram.com/gimnasiodeinnovacion/',
     email: 'interactiva5.0@gmail.com',
     accent: 'var(--gii-2)',
@@ -113,7 +118,11 @@ export const streamPrograms: StreamProgram[] = [
       { role: 'Op. Técnica', value: 'Soledad Mansilla' },
       { role: 'Producción', value: 'Esp. María José Kiszka' },
     ],
-    videosHeading: 'Videos',
+    videosHeading: 'Playlist',
+    youtube: playlist('PLN8z1hr0-qUQ'),
+    playlistId: 'PLN8z1hr0-qUQ',
+    banner: '/images/stream/sesiones-de-proyecto.jpeg',
+    bannerAlt: 'Espacio creativo de trabajo para Sesiones de Proyecto',
     accent: 'var(--ink-0)',
     videos: streamVideos['sesiones-de-proyecto'],
   },
@@ -129,8 +138,9 @@ export const streamPrograms: StreamProgram[] = [
     ],
     banner: '/images/stream/teatro-de-resistencia.webp',
     bannerAlt: 'Teatro de Resistencia',
-    videosHeading: 'Temporada 1',
+    videosHeading: 'Playlist',
     youtube: playlist('PLUeXZGb57lcnsAbkpw2WdLg-gqAQbMv7R'),
+    playlistId: 'PLUeXZGb57lcnsAbkpw2WdLg-gqAQbMv7R',
     instagram: 'https://www.instagram.com/teatro.de.resistencia',
     accent: 'var(--seg-estudiantes)',
     videos: streamVideos['teatro-de-resistencia'],

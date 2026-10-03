@@ -19,14 +19,20 @@ const columns = [
 const pillars = [
   {
     name: 'Diseño Centrado en los Usuarios',
+    image: '/images/kiszka/diseno-centrado-usuarios.webp',
+    imageAlt: 'Astronauta observando personas y elementos de interfaz para diseñar a partir de sus necesidades.',
     text: 'En un mundo donde la experiencia del cliente es crucial, comprender y satisfacer las necesidades de sus usuarios es fundamental. Juntos, mejoraremos la usabilidad y bienestar del cliente, asegurando que sus productos y servicios no solo cumplan, sino superen las expectativas.',
   },
   {
     name: 'Gestión Estratégica',
+    image: '/images/kiszka/gestion-estrategica.webp',
+    imageAlt: 'Astronauta trazando una ruta entre estrellas sobre un mapa celeste.',
     text: 'La innovación no ocurre por casualidad, es el resultado de una gestión estratégica y planificada. Brindo sesiones de innovación, que permitirán identificar oportunidades, desarrollar estrategias efectivas e implementar procesos que fomenten la creatividad y el progreso continuo.',
   },
   {
     name: 'Cultura del Cambio',
+    image: '/images/kiszka/cultura-del-cambio.webp',
+    imageAlt: 'Astronautas explorando juntos un nuevo planeta, símbolo de adaptación y cambio.',
     text: 'La capacidad de adaptarse y evolucionar es esencial para el éxito a largo plazo. Ayudaré a tu organización a adoptar una cultura del cambio, donde cada miembro del equipo esté alineado y motivado hacia la mejora constante. Estas sesiones, están diseñadas para crear un entorno donde la innovación y el cambio sean no solo aceptados, sino celebrados.',
   },
 ];
@@ -120,7 +126,13 @@ const institutional = [
   <Section background="sky" labelledby="pilares-title">
     <div id="pilares-title"><SectionHeading eyebrow="Enfoque" title="Tres aspectos clave" accent={unit.solid} /></div>
     <div class="pillars">
-      {pillars.map((p) => <article><h3>{p.name}</h3><p>{p.text}</p></article>)}
+      {pillars.map((p) => (
+        <article>
+          <img src={withBase(p.image)} alt={p.imageAlt} loading="lazy" />
+          <h3>{p.name}</h3>
+          <p>{p.text}</p>
+        </article>
+      ))}
     </div>
     <div class="about">
       <p>
@@ -195,6 +207,7 @@ const institutional = [
   h3 { font: var(--type-h3); color: var(--space-ink); }
   .columns, .pillars, .cards { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   .columns article, .pillars article, .cards li { border: 1px solid var(--line-1); border-top: 6px solid var(--lab-3); padding: 24px; background: var(--paper-0); display: grid; gap: 12px; align-content: start; }
+  .pillars img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 3px; }
   .cards a { font-weight: 500; }
   .about { margin-top: 40px; max-width: 820px; display: grid; gap: 16px; }
   blockquote { margin: 40px 0 0; padding-left: 24px; border-left: 6px solid var(--lab-3); max-width: 820px; display: grid; gap: 12px; }
