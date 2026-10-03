@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/core/Button.astro';
+import ContactBlock from '../../components/marketing/ContactBlock.astro';
+import Section from '../../components/marketing/Section.astro';
+import SectionHeading from '../../components/marketing/SectionHeading.astro';
+import YouTubeFacade from '../../components/marketing/YouTubeFacade.astro';
+import { streamPrograms } from '../../data/streamPrograms';
+import { unitBySlug } from '../../data/units';
+
+export function getStaticPaths() {
+  return streamPrograms.map((program) => ({ params: { slug: program.slug }, props: { program } }));
+}
+
+const { program } = Astro.props;
+const unit = unitBySlug('stream');
+---
+
+<BaseLayout
+  title={`${program.name} · Stream · Interactiva Hub`}
+  description={`${program.name}: ${program.tagline}`}
+  active="/stream"
+>
+  <Section background="sky" labelledby="program-title">
+    <div class="intro">
+      <div class="copy">
+        <a class="back" href="/stream">← Todo el Stream</a>
+        <div class="bar" style={`background:${program.accent}`} aria-hidden="true"></div>
+        <h1 id="program-title">{program.name}</h1>
+        <p class="tagline">{program.tagline}</p>
+        {program.description && program.description !== program.tagline && <p>{program.description}</p>}
+        <dl>
+          {program.credits.map((c) => <div><dt>{c.role}</dt><dd>{c.value}</dd></div>)}
+        </dl>
+        <div class="actions">
+          {program.youtube && <Button href={program.youtube} iconRight="→">Ver en YouTube</Button>}
+          {program.instagram && <Button href={program.instagram} variant="secondary">Ver en Instagram</Button>}
+        </div>
+      </div>
+      {program.banner && <img src={program.banner} alt={program.bannerAlt ?? program.name} />}
+    </div>
+  </Section>
+
+  <Section labelledby="videos-title">
+    <div id="videos-title">
+      <SectionHeading eyebrow="Episodios" title={program.videosHeading} accent={unit.solid} />
+    </div>
+    <div class="videos">
+      {program.videos.map((v) => <YouTubeFacade id={v.id} title={v.title || undefined} />)}
+    </div>
+  </Section>
+
+  <ContactBlock
+    email={program.email ?? 'interactiva5.0@gmail.com'}
+    emailLabel={program.name}
+    accent={program.accent}
+  />
+</BaseLayout>
+
+<style>
+  .intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+  .copy { display: grid; gap: 18px; justify-items: start; }
+  .back { font: 500 15px var(--font-body); }
+  .bar { width: 96px; height: 6px; }
+  h1 { font: var(--fw-black) clamp(34px, 4.6vw, 60px) / var(--lh-tight) var(--font-display); letter-spacing: -0.03em; color: var(--space-ink); }
+  .tagline { font: 400 var(--fs-lead) / 1.45 var(--font-body); color: var(--space-ink); }
+  p { font: 400 17px/1.55 var(--font-body); color: var(--ink-2); }
+  dl { display: grid; gap: 8px; margin: 0; }
+  dl div { display: flex; gap: 8px; flex-wrap: wrap; }
+  dt { font-weight: 700; color: var(--space-ink); }
+  dt::after { content: ':'; }
+  dd { margin: 0; color: var(--ink-2); }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .intro img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  @media (max-width: 900px) {
+    .intro { grid-template-columns: 1fr; gap: var(--space-6); }
+    .videos { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--space-6); }
+  }
+  @media (max-width: 560px) { .videos { grid-template-columns: 1fr; } }
+</style>

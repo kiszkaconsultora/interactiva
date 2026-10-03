@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactBlock from '../../components/marketing/ContactBlock.astro';
+import Section from '../../components/marketing/Section.astro';
+import SectionHeading from '../../components/marketing/SectionHeading.astro';
+import ServiceCard from '../../components/marketing/ServiceCard.astro';
+import UnitHero from '../../components/marketing/UnitHero.astro';
+import Button from '../../components/core/Button.astro';
+import { streamIntro, streamPrograms } from '../../data/streamPrograms';
+import { unitBySlug } from '../../data/units';
+
+const unit = unitBySlug('stream');
+---
+
+<BaseLayout
+  title="Stream · Interactiva Hub"
+  description="El talento chaqueño merece ser visto y escuchado. Programas y episodios del Stream de Interactiva Hub."
+>
+  <UnitHero
+    title={streamIntro.title}
+    eyebrow="Interactiva Stream"
+    lead={streamIntro.lead}
+    logo={unit.logo}
+    logoAlt="Logo de Interactiva Stream"
+    accent={unit.accent}
+  >
+    <Button href="/productora" variant="secondary" iconRight="→">Producí tu programa</Button>
+  </UnitHero>
+
+  <Section labelledby="programacion-title">
+    <div id="programacion-title">
+      <SectionHeading eyebrow="Programas" title={streamIntro.programmingTitle} lead={streamIntro.programmingLead} accent={unit.solid} />
+    </div>
+    <div class="grid">
+      {
+        streamPrograms.map((p) => (
+          <ServiceCard
+            href={`/stream/${p.slug}`}
+            name={p.name}
+            kicker={p.tagline}
+            image={p.banner}
+            logo={p.banner ? undefined : unit.logo}
+            accent={p.accent}
+            cta="Ver episodios"
+          />
+        ))
+      }
+    </div>
+  </Section>
+
+  <ContactBlock email="desafioemprendedor.ok@gmail.com" emailLabel="Desafío Emprendedor e Interactiva Diario" accent={unit.solid} />
+</BaseLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 56px; background: var(--line-1); }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--space-6); } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>
