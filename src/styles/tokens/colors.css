@@ -1,0 +1,60 @@
+:root{
+/* Neutrals — sampled from the Interactiva Hub Google Site */
+--ink-0:#000000;--ink-1:#1c1c1c;--ink-2:#3a3a3a;--ink-3:#6b6b6b;--ink-4:#9a9a9a;
+--line-1:rgba(0,0,0,.10);--line-2:rgba(0,0,0,.15);--line-inv:rgba(255,255,255,.20);
+--paper-0:#ffffff;--paper-1:#f9f9f9;--paper-2:#efefef;--paper-3:#e4e4e4;--cement:#b7b7b7;
+
+/* Core "lente" (inner iris of every unit mark) */
+--iris-1:#4d4eaa;--iris-2:#2e2dab;--iris-3:#1f1e60;--iris-4:#06071c;
+
+/* Unit accents (outer ring of each mark) */
+--cowork-1:#ffd959;--cowork-2:#ff934c;
+--gii-1:#4fc0f9;--gii-2:#0855b2;
+--stream-1:#fa00ce;--stream-2:#7404c9;
+--lab-1:#3fd575;--lab-2:#0ee7f8;--lab-3:#0056c4;--lab-4:#06386e;
+--integra:#22014d;
+--artefacto:#000000;
+
+/* Profile (segment) accents — one per audience */
+--seg-empresas:#0855b2;
+--seg-academia:#7404c9;
+--seg-instituciones:#0b8f4d;
+--seg-softlanding:#e86a1f;
+--seg-estudiantes:#c4009f;
+
+/* Sky & space — light theme (cielo claro, horizonte, nebulosa) */
+--sky-0:#ffffff;--sky-1:#f4f8ff;--sky-2:#e6f0ff;--sky-3:#cfe1fb;--sky-4:#9fc2f0;--sky-5:#5f93d6;
+--horizon:#fff1e8;--nebula:#efeaff;--stardust:#fff8e6;
+--space-ink:#0b1440;
+--halo:0 0 0 14px rgba(207,225,251,.45),0 0 80px 20px rgba(159,194,240,.45);
+--grad-sky:linear-gradient(180deg,var(--sky-2) 0%,var(--sky-1) 45%,var(--sky-0) 100%);
+--grad-dawn:linear-gradient(180deg,var(--sky-2) 0%,var(--nebula) 55%,var(--horizon) 100%);
+--grad-fade-white:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.85) 70%,#fff 100%);/* @kind color */
+
+/* Semantic */
+--text-strong:var(--space-ink);
+--text-body:var(--ink-1);
+--text-muted:var(--ink-3);
+--text-inverse:var(--paper-1);
+--surface-page:var(--paper-0);
+--surface-alt:var(--sky-1);
+--surface-sky:var(--grad-sky);
+--surface-sunken:var(--paper-2);
+--surface-inverse:var(--ink-1);
+--surface-card:var(--paper-0);
+--border-subtle:var(--line-1);
+--border-strong:var(--ink-0);
+--action-primary:var(--ink-0);
+--action-primary-text:var(--paper-1);
+--action-primary-hover:var(--ink-2);
+--focus-ring:0 0 0 2px rgba(255,255,255,.8),0 0 0 4px var(--ink-0);
+--link:var(--iris-2);
+--link-hover:var(--iris-3);
+
+/* Signature gradients (only inside marks / thin accent bars — never full backgrounds) */
+--grad-cowork:linear-gradient(90deg,var(--cowork-1),var(--cowork-2));
+--grad-gii:linear-gradient(90deg,var(--gii-1),var(--gii-2));
+--grad-stream:linear-gradient(90deg,var(--stream-1),var(--stream-2));
+--grad-lab:linear-gradient(135deg,var(--lab-1),var(--lab-3));
+--grad-iris:linear-gradient(120deg,var(--iris-2),var(--iris-4));
+}
