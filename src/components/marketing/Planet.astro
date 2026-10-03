@@ -1,0 +1,53 @@
+---
+interface Props {
+  src?: string;
+  size?: number;
+  orbit?: boolean;
+  halo?: boolean;
+  float?: boolean;
+  class?: string;
+}
+const { src, size = 320, orbit = true, halo = true, float = false, class: className } = Astro.props;
+---
+
+<div
+  class:list={['planet', className]}
+  data-float={float ? 'true' : undefined}
+  style={`--size:${size}px;--ring-1:${-size * 0.16}px;--ring-2:${-size * 0.32}px`}
+>
+  {orbit && <div class="ring ring-1"></div>}
+  {orbit && <div class="ring ring-2"></div>}
+  <div class="body" data-halo={halo ? 'true' : undefined}>
+    <slot>{src && <img src={src} alt="" />}</slot>
+  </div>
+</div>
+
+<style>
+  .planet {
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    max-width: 100%;
+    flex: none;
+  }
+  .planet[data-float='true'] { animation: hub-float 9s ease-in-out infinite; }
+  .ring { position: absolute; border-radius: 50%; }
+  .ring-1 { inset: var(--ring-1); border: 1px solid var(--sky-3); }
+  .ring-2 { inset: var(--ring-2); border: 1px dashed var(--sky-3); opacity: 0.7; }
+  .body {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--sky-2);
+  }
+  .body[data-halo='true'] { box-shadow: var(--halo); }
+  .body :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  @keyframes hub-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .planet[data-float='true'] { animation: none; }
+  }
+</style>

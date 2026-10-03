@@ -1,0 +1,107 @@
+---
+interface Props {
+  address?: string;
+  hours?: string;
+  email?: string;
+  columns?: { title: string; links: { label: string; href: string }[] }[];
+  marks?: { src: string; alt?: string }[];
+  dark?: boolean;
+}
+const {
+  address = 'Av. Edison 636, Resistencia, Chaco',
+  hours = 'Lun a Vie · 9:00 a 18:00 hs',
+  email = 'kiskza.consultora@gmail.com',
+  columns = [],
+  marks = [],
+  dark = false,
+} = Astro.props;
+---
+
+<footer class="footer" data-dark={dark ? 'true' : undefined}>
+  <div class="grid">
+    <div>
+      <div class="slogan">Conectá, Creá, Crecé.</div>
+      <div class="contact">
+        {address}<br />{hours}<br /><a href={`mailto:${email}`}>{email}</a>
+      </div>
+    </div>
+    {
+      columns.map((c) => (
+        <div>
+          <div class="col-title">{c.title}</div>
+          {c.links.map((l) => (
+            <div class="col-link"><a href={l.href}>{l.label}</a></div>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+  {
+    marks.length > 0 && (
+      <div class="marks">
+        {marks.map((m) => <img src={m.src} alt={m.alt ?? ''} />)}
+      </div>
+    )
+  }
+  <div class="legal">Interactiva Coworking & Hub · Un ecosistema de Kiszka Consultora I+D+i+V</div>
+</footer>
+
+<style>
+  .footer {
+    background: linear-gradient(180deg, var(--sky-0) 0%, var(--sky-2) 100%);
+    color: var(--space-ink);
+    padding: 80px var(--gutter) 32px;
+    --fg: var(--space-ink);
+    --sub: var(--ink-3);
+    --rule: var(--sky-3);
+  }
+  .footer[data-dark='true'] {
+    background: var(--surface-inverse);
+    --fg: var(--paper-1);
+    --sub: rgba(249, 249, 249, 0.72);
+    --rule: var(--line-inv);
+    color: var(--fg);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(auto-fit, minmax(140px, 1fr));
+    gap: 40px;
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .slogan { font: 900 40px/1 var(--font-display); letter-spacing: -0.02em; }
+  .contact { margin-top: 16px; font: 400 15px/1.6 var(--font-body); color: var(--sub); }
+  .contact a { color: var(--fg); }
+  .col-title {
+    font-family: var(--font-condensed);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-bottom: 12px;
+  }
+  .col-link { font: 400 15px/2 var(--font-body); }
+  .col-link a { color: var(--fg); text-decoration: none; }
+  .col-link a:hover { text-decoration: underline; }
+  .marks {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: var(--container);
+    margin: 48px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .marks img { height: 40px; width: auto; background: #fff; padding: 4px; border-radius: 4px; }
+  .legal { max-width: var(--container); margin: 24px auto 0; font: 400 13px var(--font-body); color: var(--sub); }
+
+  @media (max-width: 900px) {
+    .footer { padding: var(--space-8) var(--space-5) var(--space-6); }
+    .grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  }
+  @media (max-width: 600px) {
+    .footer { padding-inline: var(--space-4); }
+    .slogan { font-size: 32px; }
+  }
+</style>

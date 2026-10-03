@@ -1,0 +1,39 @@
+---
+interface Props {
+  n: number | string;
+  title: string;
+  text?: string;
+  accent?: string;
+  inverse?: boolean;
+}
+const { n, title, text, accent = 'var(--ink-0)', inverse = false } = Astro.props;
+---
+
+<div class="step" data-inverse={inverse ? 'true' : undefined} style={`--accent:${accent}`}>
+  <div class="num">{String(n).padStart(2, '0')}</div>
+  <div>
+    <div class="title">{title}</div>
+    {text && <div class="text">{text}</div>}
+  </div>
+</div>
+
+<style>
+  .step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    padding: 18px 0;
+    --fg: var(--ink-0);
+    --rule: var(--ink-0);
+    --sub: var(--ink-3);
+    border-top: 2px solid var(--rule);
+  }
+  .step[data-inverse='true'] { --fg: var(--paper-1); --rule: var(--line-inv); --sub: rgba(249, 249, 249, 0.75); }
+  .num { font: 600 40px/1 var(--font-condensed); color: var(--accent); }
+  .title { font: 700 19px/1.25 var(--font-display); color: var(--fg); }
+  .text { font: 400 15px/1.5 var(--font-body); color: var(--sub); margin-top: 4px; }
+  @media (max-width: 480px) {
+    .step { grid-template-columns: 48px 1fr; gap: var(--space-3); }
+    .num { font-size: 32px; }
+  }
+</style>

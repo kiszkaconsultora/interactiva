@@ -1,0 +1,63 @@
+---
+interface Props {
+  href: string;
+  name: string;
+  kicker?: string;
+  description?: string;
+  logo?: string;
+  image?: string;
+  accent?: string;
+  cta?: string;
+}
+const { href, name, kicker, description, logo, image, accent = 'var(--ink-0)', cta = 'Conocer' } = Astro.props;
+---
+
+<a class="card" href={href} style={`--accent:${accent}`}>
+  {image && <div class="photo"><img src={image} alt="" /></div>}
+  <div class="bar"></div>
+  <div class="body">
+    <div class="head">
+      {logo && <img class="logo" src={logo} alt="" />}
+      {kicker && <div class="kicker">{kicker}</div>}
+    </div>
+    <div class="name">{name}</div>
+    {description && <p class="desc">{description}</p>}
+    <div class="cta">{cta} →</div>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--ink-0);
+    background: var(--paper-0);
+    border: 1px solid var(--line-1);
+    transition: box-shadow var(--dur-base);
+  }
+  .card:hover { box-shadow: var(--shadow-2); color: var(--ink-0); }
+  .photo { aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2); }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+  .card:hover .photo img { transform: scale(1.03); }
+  .bar { height: 6px; background: var(--accent); }
+  .body { padding: 22px; display: grid; gap: 10px; flex: 1; align-content: start; }
+  .head { display: flex; align-items: center; gap: 12px; }
+  .logo { width: 40px; height: 40px; object-fit: contain; }
+  .kicker {
+    font-family: var(--font-condensed);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .name { font: 700 22px/1.2 var(--font-display); }
+  .desc { font: 400 15px/1.5 var(--font-body); color: var(--ink-2); margin: 0; }
+  .cta { margin-top: auto; padding-top: 8px; font: 500 15px var(--font-body); text-underline-offset: 4px; }
+  .card:hover .cta { text-decoration: underline; }
+</style>

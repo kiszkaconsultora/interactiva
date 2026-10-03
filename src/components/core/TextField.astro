@@ -1,0 +1,82 @@
+---
+interface Props {
+  name: string;
+  label?: string;
+  placeholder?: string;
+  type?: 'text' | 'email' | 'tel' | 'url' | 'password' | 'number' | 'search';
+  multiline?: boolean;
+  hint?: string;
+  error?: string;
+  value?: string;
+  required?: boolean;
+  inverse?: boolean;
+  autocomplete?: string;
+}
+const {
+  name,
+  label,
+  placeholder,
+  type = 'text',
+  multiline = false,
+  hint,
+  error,
+  value,
+  required = false,
+  inverse = false,
+  autocomplete,
+} = Astro.props;
+---
+
+<label class="field" data-inverse={inverse ? 'true' : undefined} data-error={error ? 'true' : undefined}>
+  {label && <span class="label">{label}</span>}
+  {
+    multiline ? (
+      <textarea class="control" name={name} rows={4} placeholder={placeholder} required={required}>{value}</textarea>
+    ) : (
+      <input
+        class="control"
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        required={required}
+        autocomplete={autocomplete}
+      />
+    )
+  }
+  {(error || hint) && <span class="note">{error || hint}</span>}
+</label>
+
+<style>
+  .field {
+    display: grid;
+    gap: 6px;
+    font-family: var(--font-body);
+    --fg: var(--ink-0);
+    --rule: var(--ink-0);
+  }
+  .field[data-inverse='true'] { --fg: var(--paper-1); --rule: var(--paper-1); }
+  .field[data-error='true'] { --rule: #c62828; }
+  .label {
+    font-family: var(--font-condensed);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+  .control {
+    font: 400 16px/1.4 var(--font-body);
+    padding: 12px 0;
+    background: transparent;
+    color: var(--fg);
+    border: 0;
+    border-bottom: 2px solid var(--rule);
+    border-radius: 0;
+    outline: none;
+    resize: vertical;
+    width: 100%;
+  }
+  .control:focus { border-bottom-width: 3px; box-shadow: none; }
+  .note { font-size: 13px; color: var(--text-muted); }
+  .field[data-error='true'] .note { color: #c62828; }
+</style>

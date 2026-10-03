@@ -1,0 +1,29 @@
+---
+interface Props {
+  color?: string;
+  solid?: boolean;
+  class?: string;
+}
+const { color = 'var(--ink-0)', solid = false, class: className } = Astro.props;
+---
+
+<span class:list={['tag', className]} data-solid={solid ? 'true' : undefined} style={`--c:${color}`}><slot /></span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-condensed);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 6px 10px;
+    border: 1.5px solid var(--c);
+    color: var(--c);
+    background: transparent;
+  }
+  .tag[data-solid='true'] { color: #fff; background: var(--c); }
+</style>

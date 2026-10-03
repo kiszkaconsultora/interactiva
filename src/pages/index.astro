@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import Tag from '../components/core/Tag.astro';
+import TextField from '../components/core/TextField.astro';
+import Planet from '../components/marketing/Planet.astro';
+import ProfileCard from '../components/marketing/ProfileCard.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import ServiceCard from '../components/marketing/ServiceCard.astro';
+import SpaceHero from '../components/marketing/SpaceHero.astro';
+import StepItem from '../components/marketing/StepItem.astro';
+
+// Temporary component showcase; replaced by the real home page in a later task.
+const navLinks = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Perfiles', href: '#perfiles' },
+];
+const footerColumns = [{ title: 'Explorar', links: [{ label: 'Inicio', href: '/' }] }];
+const footerMarks = [{ src: '/logos/gii50.png', alt: 'GII50' }];
+---
+
+<BaseLayout title="Interactiva Hub" navLinks={navLinks} active="Inicio" footerColumns={footerColumns} footerMarks={footerMarks}>
+  <SpaceHero>
+    <Planet src="/logos/coworking.png" size={200} float />
+    <SectionHeading eyebrow="Showcase" title="Componentes" lead="Vista temporal de los componentes." accent="var(--seg-empresas)" />
+    <Button href="/" iconRight="→">Primario</Button>
+    <Button variant="secondary" href="/">Secundario</Button>
+    <Button variant="ghost" href="/">Ghost</Button>
+    <Button disabled>Deshabilitado</Button>
+    <Tag>Etiqueta</Tag>
+    <Tag color="var(--seg-academia)" solid>Sólida</Tag>
+  </SpaceHero>
+  <section id="perfiles" style="padding:var(--space-8) var(--space-4);display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+    <ProfileCard index="01" audience="Empresas" title="Para empresas" benefit="Beneficio de ejemplo." href="#" accent="var(--seg-empresas)" />
+    <ProfileCard index="02" audience="Academia" title="Para la academia" benefit="Beneficio de ejemplo." href="#" accent="var(--seg-academia)" active />
+  </section>
+  <section id="servicios" style="padding:var(--space-8) var(--space-4);display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+    <ServiceCard href="#" name="Coworking" kicker="Unidad 1" description="Descripción de ejemplo." logo="/logos/coworking.png" accent="var(--cowork-1)" />
+  </section>
+  <section style="padding:var(--space-8) var(--space-4);max-width:640px">
+    <StepItem n={1} title="Primer paso" text="Texto de ejemplo." accent="var(--seg-empresas)" />
+    <StepItem n={2} title="Segundo paso" />
+    <TextField name="nombre" label="Nombre" placeholder="Tu nombre" required hint="Pista de ejemplo" />
+    <TextField name="mensaje" label="Mensaje" multiline />
+  </section>
+</BaseLayout>

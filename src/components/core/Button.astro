@@ -1,0 +1,100 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  inverse?: boolean;
+  disabled?: boolean;
+  iconRight?: string;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+}
+const {
+  variant = 'primary',
+  size = 'md',
+  inverse = false,
+  disabled = false,
+  iconRight,
+  href,
+  type = 'button',
+  class: className,
+} = Astro.props;
+const Element = href && !disabled ? 'a' : 'button';
+---
+
+<Element
+  href={Element === 'a' ? href : undefined}
+  type={Element === 'button' ? type : undefined}
+  disabled={Element === 'button' ? disabled : undefined}
+  aria-disabled={disabled ? 'true' : undefined}
+  class:list={['btn', className]}
+  data-variant={variant}
+  data-size={size}
+  data-inverse={inverse ? 'true' : undefined}
+  data-disabled={disabled ? 'true' : undefined}
+>
+  <slot />{iconRight && <span class="icon" aria-hidden="true">{iconRight}</span>}
+</Element>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    line-height: 1;
+    border-radius: var(--radius-0);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--dur-fast), color var(--dur-fast);
+    --fg: var(--paper-1);
+    --bg: var(--ink-0);
+    --line: var(--ink-0);
+    --bg-hover: var(--ink-2);
+    padding: 12px 22px;
+    font-size: 16px;
+  }
+  .btn[data-inverse='true'] {
+    --fg: var(--ink-0);
+    --bg: var(--paper-0);
+    --line: var(--paper-1);
+    --bg-hover: var(--paper-2);
+  }
+  .btn[data-size='sm'] { padding: 8px 14px; font-size: 14px; }
+  .btn[data-size='lg'] { padding: 16px 28px; font-size: 18px; }
+
+  .btn[data-variant='primary'] {
+    background: var(--bg);
+    color: var(--fg);
+    border: 2px solid var(--bg);
+  }
+  .btn[data-variant='primary']:hover { background: var(--bg-hover); color: var(--fg); }
+
+  .btn[data-variant='secondary'] {
+    background: transparent;
+    color: var(--line);
+    border: 2px solid var(--line);
+  }
+  .btn[data-variant='secondary']:hover { background: var(--ink-0); color: var(--paper-1); }
+  .btn[data-variant='secondary'][data-inverse='true']:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--line);
+  }
+
+  .btn[data-variant='ghost'] {
+    background: transparent;
+    color: var(--line);
+    border: 2px solid transparent;
+  }
+  .btn[data-variant='ghost']:hover {
+    color: var(--line);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .btn[data-disabled='true'] { cursor: not-allowed; opacity: 0.4; pointer-events: none; }
+
+  .icon { transition: transform var(--dur-base) var(--ease-out); }
+  .btn:hover .icon { transform: translateX(3px); }
+</style>

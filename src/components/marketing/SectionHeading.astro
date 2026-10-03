@@ -1,0 +1,45 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  inverse?: boolean;
+  accent?: string;
+}
+const { eyebrow, title, lead, align = 'left', inverse = false, accent = 'var(--ink-0)' } = Astro.props;
+---
+
+<div class="heading" data-align={align} data-inverse={inverse ? 'true' : undefined} style={`--accent:${accent}`}>
+  {eyebrow && <div class="eyebrow"><span class="bar"></span>{eyebrow}</div>}
+  <h2>{title}</h2>
+  {lead && <p class="lead">{lead}</p>}
+</div>
+
+<style>
+  .heading {
+    display: grid;
+    gap: 16px;
+    max-width: 820px;
+    text-align: left;
+    justify-items: start;
+    --fg: var(--ink-0);
+    --lead: var(--ink-2);
+  }
+  .heading[data-align='center'] { text-align: center; justify-items: center; margin-inline: auto; }
+  .heading[data-inverse='true'] { --fg: var(--paper-1); --lead: rgba(249, 249, 249, 0.82); }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-condensed);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+  .bar { width: 32px; height: 6px; background: var(--accent); flex: none; }
+  h2 { font: var(--type-h1); letter-spacing: -0.01em; color: var(--fg); margin: 0; }
+  .lead { font: 400 var(--fs-lead) / 1.45 var(--font-body); color: var(--lead); margin: 0; max-width: 680px; }
+</style>

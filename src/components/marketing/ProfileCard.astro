@@ -1,0 +1,72 @@
+---
+interface Props {
+  index: string;
+  audience: string;
+  title: string;
+  benefit: string;
+  href: string;
+  cta?: string;
+  accent?: string;
+  active?: boolean;
+}
+const { index, audience, title, benefit, href, cta = 'Entrar', accent = 'var(--ink-0)', active = false } = Astro.props;
+---
+
+<a class="card" href={href} data-active={active ? 'true' : undefined} style={`--accent:${accent}`}>
+  <div class="meta"><span>{audience}</span><span class="index">{index}</span></div>
+  <div class="title">{title}</div>
+  <div class="benefit">{benefit}</div>
+  <div class="cta">{cta}<span class="arrow" aria-hidden="true">→</span></div>
+</a>
+
+<style>
+  .card {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px 22px 20px;
+    min-height: 260px;
+    background: var(--paper-0);
+    color: var(--space-ink);
+    text-decoration: none;
+    border: 1px solid var(--sky-3);
+    border-top: 6px solid var(--accent);
+    border-radius: 4px;
+    transition:
+      background var(--dur-base) var(--ease-out),
+      color var(--dur-base),
+      transform var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base);
+  }
+  .card:hover,
+  .card:focus-visible,
+  .card[data-active='true'] {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px rgba(95, 147, 214, 0.25);
+    transform: translateY(-4px);
+  }
+  .card:focus-visible { box-shadow: var(--focus-ring); }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-condensed);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .index { opacity: 0.7; }
+  .title { font: 800 26px/1.1 var(--font-display); letter-spacing: -0.01em; }
+  .benefit { font: 400 15px/1.45 var(--font-body); opacity: 0.8; flex: 1; }
+  .card:hover .benefit,
+  .card:focus-visible .benefit,
+  .card[data-active='true'] .benefit { opacity: 0.95; }
+  .cta { display: flex; align-items: center; gap: 8px; font: 500 15px var(--font-body); }
+  .arrow { transition: transform var(--dur-base) var(--ease-out); }
+  .card:hover .arrow,
+  .card:focus-visible .arrow,
+  .card[data-active='true'] .arrow { transform: translateX(4px); }
+</style>
