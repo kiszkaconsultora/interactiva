@@ -12,7 +12,6 @@ import SpaceHero from '../components/marketing/SpaceHero.astro';
 import StepItem from '../components/marketing/StepItem.astro';
 import { units, ecosystem } from '../data/units';
 import { profiles, helpVerbs, allies } from '../data/profiles';
-import { ditSteps } from '../data/dit';
 import { contact, nasaImages } from '../data/site';
 ---
 
@@ -78,20 +77,22 @@ import { contact, nasaImages } from '../data/site';
   </Section>
 
   <SpaceHero background="dawn" minHeight={0}>
-    <div class="dit">
-      <div class="dit-intro">
+    <div class="dit-preview">
+      <div class="dit-copy">
         <SectionHeading
-          eyebrow="Metodología"
+          eyebrow="Entrenamientos y Metodología"
           title="Dispositivo DIT: 9 pasos, una trayectoria"
-          lead="Un camino secuencial y modular diseñado para gestionar eficientemente las fuentes del saber y minimizar los riesgos de fracaso."
+          lead="Un camino secuencial y modular diseñado para gestionar eficientemente las fuentes del saber y minimizar los riesgos de fracaso. Descubrí cómo entrenamos a emprendedores, profesionales y organizaciones."
           accent="var(--gii-2)"
         />
-        <div><Button href="/gimnasio-de-innovacion" iconRight="→">Conocé el Gimnasio</Button></div>
-        <div class="dit-planet" aria-hidden="true"><Planet size={140} orbit={false}><img src={nasaImages.astronautLunar} alt="" loading="lazy" /></Planet></div>
+        <div class="dit-actions">
+          <Button href="/entrenamientos" iconRight="→">Ver los 9 pasos del entrenamiento</Button>
+          <Button href="/gimnasio-de-innovacion" variant="ghost">Conocé el Gimnasio GII 5.0</Button>
+        </div>
       </div>
-      <ol class="steps">
-        {ditSteps.map((s, i) => <li><StepItem n={i + 1} title={s.title} text={s.text} accent="var(--gii-2)" /></li>)}
-      </ol>
+      <div class="dit-planet" aria-hidden="true">
+        <Planet size={180} float><img src={nasaImages.astronautLunar} alt="" loading="lazy" /></Planet>
+      </div>
     </div>
   </SpaceHero>
 
@@ -153,10 +154,10 @@ import { contact, nasaImages } from '../data/site';
   .eco-label { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
   .ecosystem ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
   .ecosystem img { height: 64px; width: auto; }
-  .dit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 64px; }
-  .dit-intro { display: grid; gap: 32px; align-content: start; }
-  .dit-planet { margin: 24px 0 0 40px; }
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; }
+  .dit-preview { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+  .dit-copy { display: grid; gap: 28px; justify-items: start; }
+  .dit-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .dit-planet { display: flex; justify-content: center; align-items: center; }
   .space { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; }
   .photos { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; }
   .photos img { width: 100%; height: 204px; object-fit: cover; border-radius: 4px; }
@@ -171,16 +172,15 @@ import { contact, nasaImages } from '../data/site';
   @media (max-width: 1100px) {
     .profiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .units { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 900px) {
-    .hero, .dit, .space { grid-template-columns: 1fr; gap: var(--space-6); }
+    .hero, .dit-preview, .space { grid-template-columns: 1fr; gap: var(--space-6); }
     .planets { height: 300px; }
     .verbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .dit-planet { margin-left: 0; }
+    .dit-planet { justify-content: flex-start; }
   }
   @media (max-width: 600px) {
-    .profiles, .units, .steps, .verbs { grid-template-columns: 1fr; }
+    .profiles, .units, .verbs { grid-template-columns: 1fr; }
     .photos .big { height: 260px; }
     .photos img { height: 140px; }
   }

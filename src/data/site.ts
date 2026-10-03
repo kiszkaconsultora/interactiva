@@ -8,6 +8,7 @@ export const navLinks: NavLink[] = [
   { label: 'Inicio', href: '/' },
   { label: 'Coworking', href: '/coworking' },
   { label: 'GII 5.0', href: '/gimnasio-de-innovacion' },
+  { label: 'Entrenamientos', href: '/entrenamientos' },
   { label: 'Kiszka', href: '/kiszka' },
   { label: 'Sesiones de Proyecto', href: '/sesiones-de-proyecto' },
   { label: 'Stream', href: '/stream' },
