@@ -59,7 +59,7 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
   .word { font: 900 22px/1 var(--font-display); letter-spacing: -0.02em; }
   .hub { font: 500 13px/1 var(--font-condensed); letter-spacing: 0.2em; text-transform: uppercase; }
   .menu { display: flex; align-items: center; gap: 32px; margin-left: auto; }
-  .nav { display: flex; gap: 24px; flex-wrap: wrap; }
+  .nav { display: flex; gap: 20px; flex-wrap: wrap; }
   .link {
     font: 400 15px var(--font-body);
     color: var(--fg);
@@ -112,7 +112,7 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
   .toggle[aria-expanded='true'] .bars::before { transform: translateY(6px) rotate(45deg); }
   .toggle[aria-expanded='true'] .bars::after { transform: translateY(-6px) rotate(-45deg); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1240px) {
     .header { flex-wrap: wrap; gap: 0; padding: var(--space-3) var(--space-4); }
     .toggle { display: inline-flex; }
     .menu {
@@ -150,7 +150,7 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
         button.focus();
       }
     });
-    window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
+    window.matchMedia('(min-width: 1241px)').addEventListener('change', (event) => {
       if (event.matches) setOpen(false);
     });
   });

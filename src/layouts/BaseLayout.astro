@@ -2,12 +2,14 @@
 import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
+import { navLinks as defaultNav } from '../data/site';
 
 interface Props {
   title: string;
   description?: string;
   navLinks?: { label: string; href: string }[];
   active?: string;
+  cta?: string;
   ctaHref?: string;
   footerColumns?: { title: string; links: { label: string; href: string }[] }[];
   footerMarks?: { src: string; alt?: string }[];
@@ -16,12 +18,18 @@ interface Props {
 const {
   title,
   description = 'Interactiva Hub: coworking e innovación en Resistencia, Chaco.',
-  navLinks = [],
+  navLinks = defaultNav,
   active,
+  cta = 'Agendá una reunión',
   ctaHref = '/contacto',
   footerColumns = [],
   footerMarks = [],
 } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const current =
+  active ??
+  navLinks.find((l) => (l.href === '/' ? path === '/' : path === l.href || path.startsWith(l.href + '/')))?.href;
 ---
 
 <!doctype html>
@@ -33,7 +41,7 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <SiteHeader links={navLinks} active={active} ctaHref={ctaHref} />
+    <SiteHeader links={navLinks} active={current} cta={cta} ctaHref={ctaHref} />
     <main><slot /></main>
     <SiteFooter columns={footerColumns} marks={footerMarks} />
   </body>

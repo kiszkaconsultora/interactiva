@@ -2,46 +2,185 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
 import Tag from '../components/core/Tag.astro';
-import TextField from '../components/core/TextField.astro';
 import Planet from '../components/marketing/Planet.astro';
 import ProfileCard from '../components/marketing/ProfileCard.astro';
+import Section from '../components/marketing/Section.astro';
 import SectionHeading from '../components/marketing/SectionHeading.astro';
 import ServiceCard from '../components/marketing/ServiceCard.astro';
 import SpaceHero from '../components/marketing/SpaceHero.astro';
 import StepItem from '../components/marketing/StepItem.astro';
-
-// Temporary component showcase; replaced by the real home page in a later task.
-const navLinks = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Perfiles', href: '#perfiles' },
-];
-const footerColumns = [{ title: 'Explorar', links: [{ label: 'Inicio', href: '/' }] }];
-const footerMarks = [{ src: '/logos/gii50.png', alt: 'GII50' }];
+import { units, ecosystem } from '../data/units';
+import { profiles, helpVerbs, allies } from '../data/profiles';
+import { ditSteps } from '../data/dit';
+import { contact, nasaImages } from '../data/site';
 ---
 
-<BaseLayout title="Interactiva Hub" navLinks={navLinks} active="Inicio" footerColumns={footerColumns} footerMarks={footerMarks}>
-  <SpaceHero>
-    <Planet src="/logos/coworking.png" size={200} float />
-    <SectionHeading eyebrow="Showcase" title="Componentes" lead="Vista temporal de los componentes." accent="var(--seg-empresas)" />
-    <Button href="/" iconRight="→">Primario</Button>
-    <Button variant="secondary" href="/">Secundario</Button>
-    <Button variant="ghost" href="/">Ghost</Button>
-    <Button disabled>Deshabilitado</Button>
-    <Tag>Etiqueta</Tag>
-    <Tag color="var(--seg-academia)" solid>Sólida</Tag>
+<BaseLayout
+  title="Interactiva Hub · Coworking e innovación en Resistencia, Chaco"
+  description="Laboratorio de innovación, tecnología y coworking en Resistencia, Chaco. Coworking, Gimnasio de Innovación, Stream y más."
+>
+  <SpaceHero background="sky" minHeight={640}>
+    <div class="hero">
+      <div class="copy">
+        <div class="eyebrow">Bienvenidos</div>
+        <h1>Dale vida, escala e impacto a tu propuesta. El momento es hoy.</h1>
+        <p class="lead">
+          Las grandes ideas no prosperan en el aislamiento; necesitan un ecosistema que las impulse. Somos el laboratorio de innovación, tecnología y coworking diseñado para transformar visión en impacto. Emprendedores, estudiantes y empresas encuentran aquí el espacio para conectar, aprender y escalar.
+        </p>
+        <div class="actions">
+          <Button href="#perfiles" iconRight="↓">Elegí tu camino</Button>
+          <Button href="/contacto" variant="ghost">Agendá una reunión</Button>
+        </div>
+      </div>
+      <div class="planets" aria-hidden="true">
+        <Planet size={320} float><img src={nasaImages.earth} alt="" loading="eager" /></Planet>
+        <div class="small"><Planet size={120} orbit={false}><img src={nasaImages.astronaut} alt="" loading="lazy" /></Planet></div>
+      </div>
+    </div>
   </SpaceHero>
-  <section id="perfiles" style="padding:var(--space-8) var(--space-4);display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <ProfileCard index="01" audience="Empresas" title="Para empresas" benefit="Beneficio de ejemplo." href="#" accent="var(--seg-empresas)" />
-    <ProfileCard index="02" audience="Academia" title="Para la academia" benefit="Beneficio de ejemplo." href="#" accent="var(--seg-academia)" active />
-  </section>
-  <section id="servicios" style="padding:var(--space-8) var(--space-4);display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-    <ServiceCard href="#" name="Coworking" kicker="Unidad 1" description="Descripción de ejemplo." logo="/logos/coworking.png" accent="var(--cowork-1)" />
-  </section>
-  <section style="padding:var(--space-8) var(--space-4);max-width:640px">
-    <StepItem n={1} title="Primer paso" text="Texto de ejemplo." accent="var(--seg-empresas)" />
-    <StepItem n={2} title="Segundo paso" />
-    <TextField name="nombre" label="Nombre" placeholder="Tu nombre" required hint="Pista de ejemplo" />
-    <TextField name="mensaje" label="Mensaje" multiline />
-  </section>
+
+  <Section id="perfiles" labelledby="perfiles-title">
+    <h2 id="perfiles-title" class="block-title">¿Quién sos? Elegí tu camino</h2>
+    <div class="profiles">
+      {profiles.map((p) => <ProfileCard {...p} />)}
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="valor-title">
+    <div id="valor-title">
+      <SectionHeading
+        eyebrow="Propuesta de valor"
+        title="Innovar es crear Valor"
+        lead="No solo creamos proyectos: construimos el motor del talento local."
+        accent="var(--sky-4)"
+      />
+    </div>
+    <p class="help-label">Te ayudamos a:</p>
+    <ol class="verbs">
+      {helpVerbs.map((v, i) => <li><StepItem n={i + 1} title={v} accent="var(--gii-2)" /></li>)}
+    </ol>
+  </Section>
+
+  <Section id="servicios" labelledby="servicios-title">
+    <div id="servicios-title">
+      <SectionHeading eyebrow="Servicios" title="Un mismo ecosistema, seis propuestas" accent="var(--sky-4)" />
+    </div>
+    <div class="units">
+      {units.map((u) => <ServiceCard href={u.href} name={u.name} kicker={u.kicker} description={u.description} logo={u.logo} accent={u.accent} />)}
+    </div>
+    <div class="ecosystem">
+      <div class="eco-label">Ecosistema</div>
+      <ul>
+        {ecosystem.map((e) => <li><img src={e.logo} alt={e.name} loading="lazy" /></li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <SpaceHero background="dawn" minHeight={0}>
+    <div class="dit">
+      <div class="dit-intro">
+        <SectionHeading
+          eyebrow="Metodología"
+          title="Dispositivo DIT: 9 pasos, una trayectoria"
+          lead="Un camino secuencial y modular diseñado para gestionar eficientemente las fuentes del saber y minimizar los riesgos de fracaso."
+          accent="var(--gii-2)"
+        />
+        <div><Button href="/gimnasio-de-innovacion" iconRight="→">Conocé el Gimnasio</Button></div>
+        <div class="dit-planet" aria-hidden="true"><Planet size={140} orbit={false}><img src={nasaImages.astronautLunar} alt="" loading="lazy" /></Planet></div>
+      </div>
+      <ol class="steps">
+        {ditSteps.map((s, i) => <li><StepItem n={i + 1} title={s.title} text={s.text} accent="var(--gii-2)" /></li>)}
+      </ol>
+    </div>
+  </SpaceHero>
+
+  <Section labelledby="espacio-title">
+    <div class="space">
+      <div class="photos">
+        <img class="big" src="/images/coworking/sala-sinergia.webp" alt="Sala Sinergia: espacio tipo loft con mesa y plantas" loading="lazy" />
+        <img src="/images/coworking/sillas-y-mesas.webp" alt="Sillas y mesas dispuestas para 30 asistentes" loading="lazy" />
+        <img src="/images/coworking/cocina-equipada.webp" alt="Cocina equipada del coworking" loading="lazy" />
+      </div>
+      <div class="space-copy">
+        <div id="espacio-title">
+          <SectionHeading
+            eyebrow={contact.address}
+            title="Espacios de Coworking"
+            lead="Espacios de trabajo equipados para Capacitaciones, Laboratorios, Networking y Coworking."
+            accent="var(--cowork-2)"
+          />
+        </div>
+        <div class="tags"><Tag>Lun a Vie · 9 a 18 hs</Tag><Tag>Wifi de 300 megas</Tag><Tag>Servicio de limpieza</Tag></div>
+        <div><Button href="/coworking" iconRight="→">Conocé los espacios</Button></div>
+      </div>
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="aliados-title">
+    <div id="aliados-title">
+      <SectionHeading eyebrow="Red" title="Nuestros Aliados" accent="var(--sky-4)" />
+    </div>
+    <ul class="allies">
+      {allies.map((a) => <li><Tag>{a}</Tag></li>)}
+    </ul>
+  </Section>
+
+  <SpaceHero background="sky" minHeight={420} align="center">
+    <div class="final">
+      <h2>Transformemos juntos el conocimiento en oportunidades de negocio.</h2>
+      <p>Estamos a un mensaje de distancia para concretar un diagnóstico personalizado.</p>
+      <Button size="lg" href="/contacto" iconRight="→">Agendá una reunión</Button>
+    </div>
+  </SpaceHero>
 </BaseLayout>
+
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--space-7); align-items: center; }
+  .copy { display: grid; gap: 28px; justify-items: start; }
+  .eyebrow { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sky-5); }
+  h1 { font: var(--fw-black) clamp(34px, 4.6vw, 64px) / var(--lh-tight) var(--font-display); letter-spacing: -0.03em; color: var(--space-ink); }
+  .lead { font: 400 var(--fs-lead) / 1.5 var(--font-body); color: var(--ink-2); max-width: 560px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .planets { position: relative; height: 420px; display: flex; align-items: center; justify-content: center; }
+  .small { position: absolute; right: 0; top: 0; }
+  .block-title { font: 700 24px var(--font-display); color: var(--space-ink); margin-bottom: 28px; }
+  .profiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .help-label { margin: 48px 0 8px; font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  .verbs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; }
+  .units { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  .ecosystem { margin-top: 56px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; border-top: 1px solid var(--line-1); padding-top: 32px; }
+  .eco-label { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  .ecosystem ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+  .ecosystem img { height: 64px; width: auto; }
+  .dit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 64px; }
+  .dit-intro { display: grid; gap: 32px; align-content: start; }
+  .dit-planet { margin: 24px 0 0 40px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; }
+  .space { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; }
+  .photos { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; }
+  .photos img { width: 100%; height: 204px; object-fit: cover; border-radius: 4px; }
+  .photos .big { height: 420px; grid-row: span 2; }
+  .space-copy { display: grid; gap: 28px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .allies { list-style: none; margin: 40px 0 0; padding: 0; display: flex; gap: 12px; flex-wrap: wrap; }
+  .final { display: grid; gap: 24px; justify-items: center; }
+  .final h2 { font: var(--type-h1); color: var(--space-ink); max-width: 760px; }
+  .final p { font: 400 var(--fs-lead) / 1.5 var(--font-body); color: var(--ink-2); }
+
+  @media (max-width: 1100px) {
+    .profiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .units { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .hero, .dit, .space { grid-template-columns: 1fr; gap: var(--space-6); }
+    .planets { height: 300px; }
+    .verbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dit-planet { margin-left: 0; }
+  }
+  @media (max-width: 600px) {
+    .profiles, .units, .steps, .verbs { grid-template-columns: 1fr; }
+    .photos .big { height: 260px; }
+    .photos img { height: 140px; }
+  }
+</style>

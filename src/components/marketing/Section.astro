@@ -1,0 +1,27 @@
+---
+interface Props {
+  background?: 'white' | 'sky' | 'alt';
+  id?: string;
+  class?: string;
+  labelledby?: string;
+}
+const { background = 'white', id, class: className, labelledby } = Astro.props;
+const bgs = { white: 'var(--sky-0)', sky: 'var(--sky-1)', alt: 'var(--paper-1)' };
+---
+
+<section id={id} class:list={['section', className]} style={`--bg:${bgs[background]}`} aria-labelledby={labelledby}>
+  <div class="wrap"><slot /></div>
+</section>
+
+<style>
+  .section { background: var(--bg); padding: var(--space-10) 0; }
+  .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  @media (max-width: 900px) {
+    .section { padding: var(--space-9) 0; }
+    .wrap { padding: 0 var(--space-5); }
+  }
+  @media (max-width: 600px) {
+    .section { padding: var(--space-8) 0; }
+    .wrap { padding: 0 var(--space-4); }
+  }
+</style>
