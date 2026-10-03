@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import SpaceHero from '../components/marketing/SpaceHero.astro';
+import StepItem from '../components/marketing/StepItem.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { ditSteps } from '../data/dit';
+import { unitBySlug } from '../data/units';
+
+const unit = unitBySlug('gimnasio-de-innovacion');
+
+// Text transcribed from the PROPÓSITO / VISIÓN / MISIÓN card images in docs/.
+const pillars = [
+  {
+    label: 'Propósito',
+    text: 'Convertir desafíos productivos, en soluciones de impacto sostenible, con optimización de tecnologías, procesos y recursos.',
+  },
+  {
+    label: 'Visión',
+    text: 'Gerenciar un centro de referencia de generación de escenarios futuros, para quienes buscan liderar el cambio en sus sectores, promoviendo una cultura del bienestar, la innovación estratégica y éxito colaborativo.',
+  },
+  {
+    label: 'Misión',
+    text: 'Impulsar a organizaciones, profesionales y emprendedores a superar desafíos de la industria 4.0 y 5.0 con herramientas de precisión, estrategias de alto rendimiento y acompañamiento centrado en el bienestar humano.',
+  },
+];
+
+const programs = [
+  {
+    id: 'gii50',
+    name: 'GII5.0 (Desarrollo de EBT)',
+    text: 'Un programa de acompañamiento integral para Empresas de Base Tecnológica. Ayudamos a las organizaciones a afrontar procesos de innovación y vinculación tecnológica para la adopción de nuevas capacidades indispensables en el mercado actual.',
+  },
+  {
+    id: 'dicha',
+    name: 'D!Cha ("Diseñando la Innovación Chaqueña")',
+    text: 'Nuestro laboratorio de innovación en formato phygital (físico y digital). Es el espacio ideal para el prototipado rápido y la experimentación de soluciones con identidad local y visión global.',
+  },
+];
+
+const infra = [
+  { name: 'Vigilancia e Inteligencia Tecnológica', text: 'Monitoreo sistemático de patentes y tendencias para reducir la incertidumbre.' },
+  { name: 'Adaptación a la Industria 4.0', text: 'Diseño de procesos gestionados por indicadores y entrenamiento de equipos interdisciplinarios.' },
+  { name: 'Gestión de Propiedad Intelectual', text: 'Asesoramiento para proteger y valorizar las innovaciones alcanzadas.' },
+];
+---
+
+<BaseLayout
+  title="Gimnasio de Innovación GII 5.0 · Interactiva Hub"
+  description="Entrenando el futuro: programas de alto rendimiento, metodología DIT de 9 pasos y servicios de infraestructura de pensamiento para organizaciones del Chaco."
+>
+  <UnitHero
+    title="Gimnasio de Innovación"
+    eyebrow="Entrenando el Futuro"
+    lead="En el Gimnasio de Innovación entendemos que la innovación no es un patio de recreo ni un espacio de bienestar relajado; es un gimnasio donde las organizaciones alcanzan sus metas mediante el entrenamiento riguroso y el coaching especializado."
+    logo={unit.logo}
+    logoAlt="Logo del Gimnasio de Innovación GII 5.0"
+    accent={unit.accent}
+    minHeight={460}
+  >
+    <Button href="#contacto" iconRight="→">Entrená tu competitividad</Button>
+  </UnitHero>
+
+  <Section labelledby="concepto-title">
+    <div id="concepto-title">
+      <SectionHeading
+        eyebrow="El concepto"
+        title="Innovar no es crear tecnología, innovar es crear Valor"
+        lead="Colaboramos con emprendedores y organizaciones que buscan anticiparse al futuro y profesionalizar sus procesos internos a través del diseño estratégico."
+        accent={unit.solid}
+      />
+    </div>
+    <div class="pillars">
+      {
+        pillars.map((p) => (
+          <article>
+            <div class="label">{p.label} de GII 5.0</div>
+            <p>{p.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="programas-title">
+    <div id="programas-title">
+      <SectionHeading
+        eyebrow="Programas"
+        title="Programas de Alto Rendimiento"
+        lead={'Ofrecemos programas específicos para que las empresas y nanoempresas chaqueñas desarrollen sus "músculos" tecnológicos y estratégicos.'}
+        accent={unit.solid}
+      />
+    </div>
+    <div class="programs">
+      {
+        programs.map((p) => (
+          <article id={p.id}>
+            <h3>{p.name}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <SpaceHero background="dawn" minHeight={0}>
+    <div class="dit">
+      <div class="dit-intro">
+        <SectionHeading
+          eyebrow="Metodología DIT"
+          title="Los 9 Pasos de la Transformación"
+          lead="Utilizamos el Dispositivo de Innovación y Transformación (DIT), un camino secuencial y modular diseñado para gestionar eficientemente las fuentes del saber y minimizar los riesgos de fracaso."
+          accent={unit.solid}
+        />
+      </div>
+      <ol class="steps">
+        {ditSteps.map((s, i) => <li><StepItem n={i + 1} title={s.title} text={s.text} accent={unit.solid} /></li>)}
+      </ol>
+    </div>
+  </SpaceHero>
+
+  <Section labelledby="infra-title">
+    <div id="infra-title">
+      <SectionHeading
+        eyebrow="Servicios"
+        title="Servicios de Infraestructura de Pensamiento"
+        lead={'El gimnasio provee herramientas para la "descarga cognitiva", permitiendo que los equipos externalicen su estrategia en soportes visuales para enfocarse en conectar ideas y detectar incoherencias estratégicas.'}
+        accent={unit.solid}
+      />
+    </div>
+    <ul class="infra">
+      {infra.map((i) => <li><h3>{i.name}</h3><p>{i.text}</p></li>)}
+    </ul>
+  </Section>
+
+  <Section background="sky" labelledby="humano-title">
+    <div id="humano-title">
+      <SectionHeading
+        eyebrow="El Factor Humano"
+        title="¿Estás listo para entrenar tu competitividad?"
+        lead="Ofrecemos lo que la Inteligencia Artificial no puede generar: empatía, experiencia y acompañamiento humano en cada etapa del cambio organizacional. Transformemos juntos el conocimiento en oportunidades de negocio."
+        accent={unit.solid}
+      />
+    </div>
+  </Section>
+
+  <div id="contacto">
+    <ContactBlock email="kiskza.consultora@gmail.com" emailLabel="Esp. María José Kiszka, Directora Ejecutiva" accent={unit.solid} />
+  </div>
+</BaseLayout>
+
+<style>
+  .pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  .pillars article, .programs article, .infra li { border: 1px solid var(--line-1); border-top: 6px solid var(--gii-2); padding: 24px; background: var(--paper-0); display: grid; gap: 12px; align-content: start; }
+  .label { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gii-2); }
+  p { font: 400 16px/1.55 var(--font-body); color: var(--ink-2); }
+  h3 { font: var(--type-h3); color: var(--space-ink); }
+  .programs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  .dit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 64px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; }
+  .infra { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  @media (max-width: 1100px) {
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .pillars, .programs, .infra, .dit { grid-template-columns: 1fr; }
+    .dit { gap: var(--space-6); }
+  }
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+</style>

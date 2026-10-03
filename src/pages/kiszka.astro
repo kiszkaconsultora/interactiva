@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { unitBySlug } from '../data/units';
+
+const unit = unitBySlug('kiszka');
+
+const columns = [
+  { q: '¿Qué ofrezco?', a: 'Fusionar ciencia, estrategia y bienestar para generar servicios de vinculación tecnológica, innovación y desarrollo de negocios.' },
+  { q: '¿Para quién?', a: 'Nanoempresas, Emprendimientos y Organizaciones que quieren anticiparse al futuro y profesionalizar sus procesos.' },
+  { q: '¿Trabajamos juntos?', a: 'Cuento con herramientas, interdisciplinarias y validadas en diversos procesos. Tu crecimiento será inevitable, con discreción y acompañamiento.' },
+];
+
+const pillars = [
+  {
+    name: 'Diseño Centrado en los Usuarios',
+    text: 'En un mundo donde la experiencia del cliente es crucial, comprender y satisfacer las necesidades de sus usuarios es fundamental. Juntos, mejoraremos la usabilidad y bienestar del cliente, asegurando que sus productos y servicios no solo cumplan, sino superen las expectativas.',
+  },
+  {
+    name: 'Gestión Estratégica',
+    text: 'La innovación no ocurre por casualidad, es el resultado de una gestión estratégica y planificada. Brindo sesiones de innovación, que permitirán identificar oportunidades, desarrollar estrategias efectivas e implementar procesos que fomenten la creatividad y el progreso continuo.',
+  },
+  {
+    name: 'Cultura del Cambio',
+    text: 'La capacidad de adaptarse y evolucionar es esencial para el éxito a largo plazo. Ayudaré a tu organización a adoptar una cultura del cambio, donde cada miembro del equipo esté alineado y motivado hacia la mejora constante. Estas sesiones, están diseñadas para crear un entorno donde la innovación y el cambio sean no solo aceptados, sino celebrados.',
+  },
+];
+
+const services = [
+  { name: 'Sesiones de Proyecto ®', text: 'Servicios de Asistencia Primaria en Diseño para Apasionados.', href: '/sesiones-de-proyecto' },
+  {
+    name: 'Sesiones de Innovación',
+    text: 'Servicios de Gestión del Cambio para empresas y Organizaciones.',
+    href: 'https://docs.google.com/document/d/1g8zeO2wOQZMHZMH6il5Pa6i6KrchkEvU/edit',
+  },
+  { name: 'Interactiva Coworking', text: 'Espacios de trabajo equipados para Capacitaciones, Laboratorios, Networking y Coworking.', href: '/coworking' },
+];
+
+const coordination = [
+  {
+    id: 'gii50',
+    name: 'GII5.0',
+    text: 'Desarrollo de EBT que ayuda a las organizaciones a afrontar procesos de innovación y vinculación tecnológica para la adopción de nuevas capacidades.',
+    href: '/gimnasio-de-innovacion',
+  },
+  {
+    id: 'dicha',
+    name: 'D!Cha',
+    text: '"Diseñando la Innovación Chaqueña". Es un laboratorio de innovación en formato phygital.',
+    href: 'https://sites.google.com/view/fundaciondicha/inicio',
+  },
+  {
+    id: 'tecnolografica',
+    name: 'Tecnolográfica',
+    text: 'Espacio de divulgación e intercambio de la materia Tecnología 1 de la Carrera de Diseño Gráfico. Facultad de Arquitectura y Urbanismo de la U.N.N.E.',
+    href: 'https://sites.google.com/view/tecnolografica/propuesta',
+  },
+];
+
+const institutional = [
+  {
+    name: 'Co-Gestión de Diseño de Interiores del Nordeste Argentino. DINA: 2018',
+    text: 'Diseño de Interiores del Nordeste Argentino. Equipo de Investigación-acción sobre identidad de espacios.',
+    href: 'https://www.instagram.com/dinadesign.ar',
+  },
+  {
+    name: 'Gestión Institucional en Taller de Artes Visuales: 2012/2016',
+    text: 'Dirección institucional y Gestión Cultural.',
+  },
+  {
+    name: 'Gestión Institucional en Sec. de Extensión de la FAU-UNNE: 2012/2016',
+    text: 'Dirección de proyectos de Extensión Universitaria.',
+  },
+];
+---
+
+<BaseLayout
+  title="Kiszka Consultora I+D+i+V · Interactiva Hub"
+  description="Servicios de vinculación tecnológica, innovación y desarrollo de negocios para nanoempresas, emprendimientos y organizaciones. Esp. María José Kiszka."
+>
+  <UnitHero
+    title="Kiszka Consultora I+D+i+V"
+    eyebrow="Esp. María José Kiszka"
+    lead="Transformemos juntos el conocimiento, en oportunidades de negocio."
+    logo={unit.logo}
+    logoAlt="Logo de Kiszka Consultora I+D+i+V"
+    accent={unit.accent}
+  >
+    <Button href="#contacto" iconRight="→">Pedí tu diagnóstico</Button>
+  </UnitHero>
+
+  <Section labelledby="perfil-title">
+    <div class="profile">
+      <img src="/images/kiszka/retrato.webp" alt="Retrato circular de la directora ejecutiva de Kiszka Consultora" loading="lazy" />
+      <div class="profile-copy">
+        <div id="perfil-title">
+          <SectionHeading
+            eyebrow="Dir. Ejecutiva"
+            title="Tu desafío es crecer, el mío es hacerlo posible."
+            lead="Estamos a un mensaje de distancia para concretar un diagnóstico personalizado."
+            accent={unit.solid}
+          />
+        </div>
+        <p>
+          <a href="https://www.linkedin.com/in/mariajosekiszka/">Esp. María José Kiszka</a>. Gerenciamiento de Innovación, Vinculación y Gestión Tecnológica GTEC. Consultora I+D+i+V. Docente Universitaria.
+        </p>
+        <p>Colaboro con personas y organizaciones que requieren soluciones técnicas y creativas. A través de diseño estratégico, innovación y tecnología.</p>
+      </div>
+    </div>
+    <div class="columns">
+      {columns.map((c) => <article><h3>{c.q}</h3><p>{c.a}</p></article>)}
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="pilares-title">
+    <div id="pilares-title"><SectionHeading eyebrow="Enfoque" title="Tres aspectos clave" accent={unit.solid} /></div>
+    <div class="pillars">
+      {pillars.map((p) => <article><h3>{p.name}</h3><p>{p.text}</p></article>)}
+    </div>
+    <div class="about">
+      <p>
+        Con una sólida formación interdisciplinaria, trayectoria académica y profesional enfocada en diseño estratégico, innovación y gestión tecnológica, mi aporte profesional se centra en tres aspectos clave: vinculación + desarrollo + innovación. De este maridaje surgen procesos para la creación de: productos + servicios + espacios + experiencias.
+      </p>
+      <p>
+        Servicios para la adaptación de organizaciones a la Industria 4.0. Investigando, diagnosticando, diseñando procesos, gestionándolos a través de indicadores y entrenando equipos fomentando la colaboración interdisciplinaria.
+      </p>
+    </div>
+  </Section>
+
+  <Section labelledby="valor-title">
+    <div id="valor-title"><SectionHeading eyebrow="Innovación" title="Innovar no es crear tecnología, innovar es crear Valor." accent={unit.solid} /></div>
+    <blockquote>
+      <p>"Investigar es transformar dinero en conocimiento. Innovar es transformar el conocimiento en Valor. La tarea es crear valor por medio de conocimiento disponible aplicado a dar solución a necesidades emergentes y latentes".</p>
+      <footer>Dr. Hartmut Raffler, VP Siemens</footer>
+    </blockquote>
+  </Section>
+
+  <Section background="sky" labelledby="servicios-title">
+    <div id="servicios-title"><SectionHeading eyebrow="Servicios" title="Servicios Kiszka" accent={unit.solid} /></div>
+    <ul class="cards">
+      {services.map((s) => (
+        <li><h3>{s.name}</h3><p>{s.text}</p><a href={s.href}>Conocé más →</a></li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section labelledby="coord-title">
+    <div id="coord-title"><SectionHeading eyebrow="Programas" title="Coordinación Kiszka" accent={unit.solid} /></div>
+    <ul class="cards">
+      {coordination.map((s) => (
+        <li id={s.id}><h3>{s.name}</h3><p>{s.text}</p><a href={s.href}>Conocé más →</a></li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section background="sky" labelledby="inst-title">
+    <div id="inst-title"><SectionHeading eyebrow="Trayectoria" title="Gestión Institucional Kiszka" accent={unit.solid} /></div>
+    <ul class="cards">
+      {institutional.map((s) => (
+        <li>
+          <h3>{s.name}</h3>
+          <p>{s.text}</p>
+          {s.href && <a href={s.href}>Conocé más →</a>}
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section labelledby="humano-title">
+    <div id="humano-title">
+      <SectionHeading
+        eyebrow="Acompañamiento"
+        title="Te ofrezco todo lo que la Inteligencia Artificial no puede generar."
+        lead="empatía + experiencia + acompañamiento"
+        accent={unit.solid}
+      />
+    </div>
+  </Section>
+
+  <div id="contacto">
+    <ContactBlock email="kiskza.consultora@gmail.com" emailLabel="Kiszka Consultora" accent={unit.solid} />
+  </div>
+</BaseLayout>
+
+<style>
+  .profile { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 64px; align-items: center; }
+  .profile img { width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
+  .profile-copy { display: grid; gap: 20px; }
+  p { font: 400 17px/1.55 var(--font-body); color: var(--ink-2); }
+  h3 { font: var(--type-h3); color: var(--space-ink); }
+  .columns, .pillars, .cards { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .columns article, .pillars article, .cards li { border: 1px solid var(--line-1); border-top: 6px solid var(--lab-3); padding: 24px; background: var(--paper-0); display: grid; gap: 12px; align-content: start; }
+  .cards a { font-weight: 500; }
+  .about { margin-top: 40px; max-width: 820px; display: grid; gap: 16px; }
+  blockquote { margin: 40px 0 0; padding-left: 24px; border-left: 6px solid var(--lab-3); max-width: 820px; display: grid; gap: 12px; }
+  blockquote p { font: 500 22px/1.4 var(--font-display); color: var(--space-ink); }
+  blockquote footer { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  @media (max-width: 900px) {
+    .profile { grid-template-columns: 1fr; gap: var(--space-6); }
+    .profile img { max-width: 280px; }
+    .columns, .pillars, .cards { grid-template-columns: 1fr; margin-top: var(--space-6); }
+  }
+</style>

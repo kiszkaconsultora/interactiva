@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { unitBySlug } from '../data/units';
+
+const unit = unitBySlug('sesiones-de-proyecto');
+
+const form = 'https://docs.google.com/forms/d/e/1FAIpQLSfZonRz3DAcB-jdUaZNWHUm9xCXtGkSX8TsKJqqY2n7eKozag/viewform';
+const formWhy = 'https://forms.gle/stiH2aekmyS92QY37';
+
+const dimensions = [
+  {
+    name: 'Hábitat',
+    video: '/video/habitat.mp4',
+    poster: '/video/habitat.jpg',
+    text: 'El hábitat está conformado por todo lo que nos rodea e interpela, tanto físico como metafísico. En dicho territorio desarrollamos todas nuestras actividades.',
+  },
+  {
+    name: 'Hábitos',
+    video: '/video/habitos.mp4',
+    poster: '/video/habitos.jpg',
+    text: 'Los hábitos se constituyen en nosotros en las acciones que hacemos de manera consciente e inconsciente.',
+  },
+  {
+    name: 'Habitarse',
+    video: '/video/habitarse.mp4',
+    poster: '/video/habitarse.jpg',
+    text: 'Habitarse, es la síntesis de interacciones entre el mundo exterior y nuestros cuerpos físicos y emocionales, que conforman nuestra subjetividad entendida como mundo interno.',
+  },
+];
+
+const designKinds = [
+  ['de Emprendimientos.', 'de Identidad.', 'de Servicios.', 'Estratégico.'],
+  ['Arquitectónico.', 'de Interiores.', 'de Productos.', 'de Experiencias.'],
+];
+
+const disciplines = [
+  { name: 'Antropología Social', image: '/images/sesiones/antropologia-social.webp', alt: 'Taller con notas adhesivas sobre una pared' },
+  { name: 'Psicología Social', image: '/images/sesiones/psicologia-social.webp', alt: 'Equipo de trabajo chocando las manos' },
+  { name: 'Arquitectura', image: '/images/sesiones/arquitectura.webp', alt: 'Planos arquitectónicos y casco de obra' },
+  { name: 'Bellas Artes', image: '/images/sesiones/bellas-artes.webp', alt: 'Pintura abstracta junto a una lámpara' },
+  { name: 'Habilidades Emprendedoras', image: '/images/sesiones/habilidades-emprendedoras.webp', alt: 'Notebooks y gráficos sobre una mesa de trabajo' },
+];
+
+const labs = [
+  { caption: '¿Cómo darle identidad a tus espacios?', image: '/images/sesiones/identidad-de-espacios.webp', alt: 'Mujer sentada frente a un dibujo lineal de una habitación' },
+  { caption: 'Las Sesiones de Proyecto son consultorías.', image: '/images/sesiones/consultorias.webp', alt: 'Fotos de interiores sobre un escritorio' },
+  { caption: '¿Sabés que disfrutar del proceso de hacer tu casa es posible?', image: '/images/sesiones/hacer-tu-casa.webp', alt: 'Pareja eligiendo muestras de pintura' },
+  { caption: 'Sesiones de Proyecto ¿para qué?', image: '/images/sesiones/para-que.webp', alt: 'Mujer con el boceto de un living', href: formWhy },
+];
+---
+
+<BaseLayout
+  title="Sesiones de Proyecto · Interactiva Hub"
+  description="Servicios de Asistencia Primaria en Diseño para Apasionados: consultoría de diseño de emprendimientos, identidad, servicios, interiores, productos y experiencias."
+>
+  <UnitHero
+    title="Sesiones de Proyecto"
+    eyebrow="¡Bienvenidos!"
+    lead={unit.description}
+    logo={unit.logo}
+    logoAlt="Logo de Sesiones de Proyecto"
+    accent={unit.accent}
+  >
+    <Button href={form} iconRight="→">¡Quiero Sesionar!</Button>
+  </UnitHero>
+
+  <Section labelledby="dimensiones-title">
+    <div id="dimensiones-title">
+      <SectionHeading eyebrow="Tres dimensiones" title="Trabajamos en tres dimensiones" accent={unit.solid} />
+    </div>
+    <ul class="dimensions">
+      {
+        dimensions.map((d) => (
+          <li>
+            <video autoplay muted loop playsinline preload="metadata" poster={d.poster} aria-label={`Animación: ${d.name}`}>
+              <source src={d.video} type="video/mp4" />
+            </video>
+            <h3>{d.name}</h3>
+            <p>{d.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section background="sky" labelledby="consultoria-title">
+    <div class="consult">
+      <div>
+        <div id="consultoria-title"><SectionHeading eyebrow="Diseño" title="Servicios de Consultoría" accent={unit.solid} /></div>
+        <div class="kinds">
+          {
+            designKinds.map((col) => (
+              <ul>
+                {col.map((k) => <li><span>Diseño</span> {k}</li>)}
+              </ul>
+            ))
+          }
+        </div>
+      </div>
+      <video autoplay muted loop playsinline preload="metadata" poster="/video/consultoria-de-diseno.jpg" aria-label="Animación: consultoría de diseño">
+        <source src="/video/consultoria-de-diseno.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </Section>
+
+  <Section labelledby="herramientas-title">
+    <div class="tools">
+      <div class="tools-copy">
+        <div id="herramientas-title">
+          <SectionHeading eyebrow="Método" title="Herramientas Indisciplinadas para crear tus Proyectos" accent={unit.solid} />
+        </div>
+        <p>El cliente expone estrategias, dudas, necesidades y deseos, obstáculos y miedos, entre otros tópicos y el consultor aporta herramientas técnicas, creatividad, experiencia.</p>
+        <p>Los usuarios, a través de nuestros métodos de cocreación experimentan la creación mediadas por 5 dimensiones:</p>
+        <p class="five">objetos + planos + espacios + experiencias + energía</p>
+        <p>El rol del sesionista en la sesión, es empoderar y dar protagonismo a quien va a financiar, gestionar, transitar, habitar y transformar sistemáticamente su lugar en el mundo.</p>
+        <p>Se ocupa de CO-PENSAR, y CO-CREAR estrategias para que el apasionado domine todo el proceso, asumiendo el mando de toda la intervención. Porque nadie le va a poner tanta pasión como vos.</p>
+        <p>Los proyectos en nuestro medio se llevan a cabo por distintos agentes: profesionales, técnicos, comerciantes y apasionados.</p>
+        <div><Button href={form} iconRight="→">¡Quiero Sesionar!</Button></div>
+      </div>
+      <img src="/images/sesiones/mesa-de-consultoria.webp" alt="Mesa de reunión vista desde arriba, con café y papeles" loading="lazy" />
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="disciplinas-title">
+    <div id="disciplinas-title">
+      <SectionHeading
+        eyebrow="Interdisciplina"
+        title="Herramientas interdisciplinarias para crear tus Proyectos"
+        lead="Una consultoría es una reunión de trabajo realizada para alcanzar un objetivo. Es una reunión de trabajo para resolver problemas de diseño, productiva y resolutiva."
+        accent={unit.solid}
+      />
+    </div>
+    <div class="definition">
+      <p>No es una consultita, ni un asesoramiento exprés, tampoco una charla entre profesional y comitente.</p>
+      <p>Hay objetivos que requieren más de una reunión, así como hay consultorías que implican investigación, desarrollo e innovación en formato de proyecto.</p>
+      <p><strong>Sesiones de Proyecto, es un sistema de trabajo que articula.</strong></p>
+    </div>
+    <ul class="disciplines">
+      {
+        disciplines.map((d) => (
+          <li>
+            <img src={d.image} alt={d.alt} loading="lazy" />
+            <h3>{d.name}</h3>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section labelledby="labs-title">
+    <div id="labs-title">
+      <SectionHeading eyebrow="Laboratorios" title="Contamos con un laboratorio físico y otro virtual" accent={unit.solid} />
+    </div>
+    <ul class="labs">
+      {
+        labs.map((l) => (
+          <li>
+            <img src={l.image} alt={l.alt} loading="lazy" />
+            {l.href ? <a href={l.href}>{l.caption} →</a> : <p>{l.caption}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section background="sky" labelledby="confort-title">
+    <div class="confort">
+      <div id="confort-title">
+        <SectionHeading eyebrow="El primer paso" title="El confort es un camino que inicia con una Sesión de Proyecto" accent={unit.solid} />
+      </div>
+      <div class="actions">
+        <Button href={form} iconRight="→">¡Quiero Sesionar!</Button>
+        <Button href="https://www.instagram.com/sesionesdeproyecto/" variant="secondary">Instagram</Button>
+        <Button href="https://www.facebook.com/sesionesdeproyecto/photos/" variant="secondary">Facebook</Button>
+      </div>
+    </div>
+  </Section>
+
+  <ContactBlock email={unit.email!} emailLabel="Sesiones de Proyecto" accent={unit.solid} />
+</BaseLayout>
+
+<style>
+  ul { list-style: none; margin: 0; padding: 0; }
+  h3 { font: var(--type-h3); color: var(--space-ink); }
+  p { font: 400 17px/1.55 var(--font-body); color: var(--ink-2); }
+  video, .tools img { width: 100%; display: block; object-fit: cover; border-radius: 4px; background: var(--paper-2); }
+  .dimensions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  .dimensions li { display: grid; gap: 12px; align-content: start; }
+  .dimensions video { aspect-ratio: 1; }
+  .consult { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+  .kinds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+  .kinds li { font: 700 22px/1.4 var(--font-display); color: var(--space-ink); border-top: 1px solid var(--line-1); padding: 12px 0; }
+  .kinds li span { color: var(--ink-3); font-weight: 500; }
+  .consult video { aspect-ratio: 876 / 960; }
+  .tools { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+  .tools-copy { display: grid; gap: 18px; justify-items: start; }
+  .tools img { aspect-ratio: 4 / 5; }
+  .five { font: 700 20px/1.4 var(--font-display); color: var(--space-ink); border-left: 6px solid var(--ink-0); padding-left: 16px; }
+  .definition { display: grid; gap: 14px; max-width: 820px; margin-top: 32px; }
+  .disciplines { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; margin-top: 56px; }
+  .disciplines li { background: var(--paper-0); display: grid; gap: 0; align-content: start; border-top: 6px solid var(--ink-0); }
+  .disciplines img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .disciplines h3 { padding: 16px; font-size: 18px; }
+  .labs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  .labs li { display: grid; gap: 12px; align-content: start; }
+  .labs img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
+  .labs a { font: 500 17px/1.4 var(--font-body); }
+  .confort { display: grid; gap: 32px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 1100px) {
+    .disciplines { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .labs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .dimensions, .consult, .tools { grid-template-columns: 1fr; }
+    .consult, .tools { gap: var(--space-6); }
+    .dimensions, .disciplines, .labs { margin-top: var(--space-6); }
+  }
+  @media (max-width: 600px) {
+    .disciplines { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kinds { grid-template-columns: 1fr; gap: 0; }
+    .labs { grid-template-columns: 1fr; }
+  }
+</style>

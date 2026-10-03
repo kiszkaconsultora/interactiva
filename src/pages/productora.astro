@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { unitBySlug } from '../data/units';
+
+const unit = unitBySlug('productora');
+const proposal = 'http://walink.co/14f307';
+
+const adProducts = [
+  { name: 'Logo Rotativo', price: '$ 50.000 por mes', text: 'Colocamos tu logo en momentos estratégicos contando que apoyás el canal y los programas; Error 404, Desafío Emprendedor y magIA.' },
+  { name: 'Reel Publicitario', price: '$ 40.000 por episodio', text: 'Generamos reel en tu local comercial, y lo emitimos durante los programas. Luego editamos el recorte y lo compartimos en redes sociales.' },
+  { name: 'Reel del Vivo', price: '$ 25.000 por episodio', text: 'Presentamos tu producto en el vivo, compartiendo la info para efectivizar la venta. Luego editamos el recorte y lo compartimos en redes sociales.' },
+  { name: 'PNT en Vivo', text: 'Armamos el guión para presentar tus productos en el vivo de manera orgánica durante aprox. 5 minutos de aire. Luego se edita el recorte y se presenta en formato reel.' },
+  { name: 'Unboxing de Ventas', text: 'Creamos la experiencia de apertura única, donde tu producto se destaca. Diseñamos el momento para aumentar el valor percibido de tu marca o negocio, originando recomendaciones orgánicas en redes sociales.' },
+];
+
+const plans = [
+  { name: 'Plan Básico', price: '$ 300.000 por mes', text: 'Incluye Alquiler del set, operación técnica y pre-producción.' },
+  { name: 'Plan Hub', price: '$ 380.000 por mes', text: 'Incluye Alquiler del set, operación técnica, pre-producción y producción.' },
+  { name: 'Plan Premium', price: '$ 500.000 por mes', text: 'Incluye Alquiler del set, operación técnica, pre-producción y producción. Además te llevás el Backstage y clips para divulgar el episodio de manera estratégica.' },
+];
+
+const services = [
+  { name: 'Estudio Equipado', price: '$ 140.000 por 4 episodios / $ 45.000 por episodio', image: '/images/productora/estudio-equipado.webp', alt: 'Escritorio de streaming con cámaras y escenografía', text: 'Contamos con un set equipado con cámaras, sonido, escenografía, iluminación y detalles, para darte calidad y distinción en tus producciones.' },
+  { name: 'Operación Técnica', price: '$ 70.000 por 4 episodios / $ 20.000 por episodio', image: '/images/productora/operacion-tecnica.webp', alt: 'Puesto de operación técnica con iluminación violeta', text: 'Transmisión y/o Registro audiovisual de episodio stream o podcast. Operación, coordinación y disposición de equipos.' },
+  { name: 'Backstage del vivo', price: '$ 80.000 por 4 episodios', image: '/images/productora/backstage.webp', alt: 'Presentadora frente a un equipo de cámaras', text: 'Sesión fotográfica del detrás de escena y creación de videos. 15 fotografías y 3 videos. Entrega de piezas digitales con edición básica.' },
+  { name: 'Pre-Producción', price: '$ 90.000 por 4 episodios / $ 30.000 por episodio', image: '/images/productora/pre-produccion.webp', alt: 'Equipo preparando luces en el set', text: 'Construcción del guión, diseño de escenografía, preparación del set. Diseño de flyers publicitarios y publicación en redes sociales.' },
+  { name: 'Producción', image: '/images/productora/produccion.webp', alt: 'Videollamada de cuatro personas durante un podcast', text: 'Acompañamiento técnico durante el rodaje. Recepción de invitados y asistencia a los conductores.' },
+  { name: 'Post-Producción', image: '/images/productora/post-produccion.webp', alt: 'Miniatura de un episodio de magIA', text: 'Generamos 3 clips por cada episodio, que permitan divulgar contenido de valor del capítulo.' },
+];
+---
+
+<BaseLayout
+  title="Productora · Interactiva Hub"
+  description="Producción audiovisual en formato streaming y podcast en Resistencia, Chaco: planes mensuales, servicios por episodio y productos publicitarios."
+>
+  <UnitHero
+    title="Productora"
+    eyebrow="Streaming y Podcast"
+    lead={unit.description}
+    logo={unit.logo}
+    logoAlt="Logo de Interactiva Stream"
+    accent={unit.accent}
+  >
+    <Button href={proposal} iconRight="→">Consultanos y armamos una propuesta a tu medida</Button>
+  </UnitHero>
+
+  <Section labelledby="programa-title">
+    <div class="program">
+      <div>
+        <div id="programa-title">
+          <SectionHeading eyebrow="Tu programa" title="Contale al mundo lo maravilloso de tus ideas" lead="Generamos el contenido para posicionarte e impulsar tus ventas." accent={unit.solid} />
+        </div>
+        <ul class="credits">
+          <li><strong>Conducción y Producción:</strong> Vos y tu equipo.</li>
+          <li><strong>Producción Integral:</strong> Equipo Interactiva Hub.</li>
+          <li><strong>Op. Técnica:</strong> Soledad Mansilla.</li>
+          <li>Tiempo considerado del episodio una hora, 50 minutos de aire.</li>
+        </ul>
+      </div>
+      <img src="/images/productora/hero.webp" alt="Rostro con efecto de glitch sobre una franja del horizonte de una ciudad" loading="lazy" />
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="planes-title">
+    <div id="planes-title">
+      <SectionHeading
+        eyebrow="Planes"
+        title="¿Querés producir contenido?"
+        lead="Interactiva Hub cuenta con los recursos necesarios para desarrollar tu proyecto audiovisual en formato Streaming y Podcast."
+        accent={unit.solid}
+      />
+    </div>
+    <ul class="cards three">
+      {plans.map((p) => <li><h3>{p.name}</h3><div class="price">{p.price}</div><p>{p.text}</p></li>)}
+    </ul>
+    <div class="cta"><Button href={proposal} iconRight="→">Consultanos y armamos una propuesta a tu medida</Button></div>
+  </Section>
+
+  <Section labelledby="servicios-title">
+    <div id="servicios-title">
+      <SectionHeading eyebrow="Servicios" title="Armá tu producción a la carta" accent={unit.solid} />
+    </div>
+    <ul class="services">
+      {
+        services.map((s) => (
+          <li>
+            <img src={s.image} alt={s.alt} loading="lazy" />
+            <div class="body">
+              <h3>{s.name}</h3>
+              {s.price && <div class="price">{s.price}</div>}
+              <p>{s.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section background="sky" labelledby="publicidad-title">
+    <div id="publicidad-title">
+      <SectionHeading
+        eyebrow="Publicidad"
+        title="¿Querés amplificar el mensaje de tu negocio o proyecto con Interactiva Hub?"
+        lead="A través de distintas acciones comerciales visibilizamos y amplificamos tu mensaje."
+        accent={unit.solid}
+      />
+    </div>
+    <ul class="cards three">
+      {adProducts.map((p) => <li><h3>{p.name}</h3>{p.price && <div class="price">{p.price}</div>}<p>{p.text}</p></li>)}
+    </ul>
+  </Section>
+
+  <Section labelledby="comunidad-title">
+    <div id="comunidad-title">
+      <SectionHeading
+        eyebrow="Comunidad"
+        title="¿Querés ser parte de la comunidad de Interactiva Hub?"
+        lead="Amigos, emprendedores y empresas sostienen este proyecto que impulsa el talento chaqueño, promueve los vínculos saludables 2.0, y desarrolla industrias creativas y culturales."
+        accent={unit.solid}
+      />
+    </div>
+    <div class="member">
+      <p class="member-price">Por el precio de un café $6000 podés ser parte de la comunidad de Interactiva Hub:</p>
+      <ul>
+        <li>Participación gratuita en los eventos de nuestra comunidad: Radar de oportunidades y Networking local.</li>
+        <li>Descuentos exclusivos del 15% de todos los proveedores de servicios en nuestra comunidad.</li>
+      </ul>
+    </div>
+    <div class="cta">
+      <Button href="https://www.youtube.com/playlist?list=PLUeXZGb57lcltcTEjqFsolRImfoVjNLlF" variant="secondary">Ver en YouTube</Button>
+      <Button href="https://www.instagram.com/gimnasiodeinnovacion/" variant="secondary">Ver en Instagram</Button>
+    </div>
+  </Section>
+
+  <ContactBlock email={unit.email!} emailLabel="Productora" accent={unit.solid} />
+</BaseLayout>
+
+<style>
+  ul { list-style: none; margin: 0; padding: 0; }
+  h3 { font: var(--type-h3); color: var(--space-ink); }
+  p { font: 400 16px/1.55 var(--font-body); color: var(--ink-2); }
+  img { width: 100%; display: block; object-fit: cover; border-radius: 4px; }
+  .price { font: 700 20px/1.3 var(--font-display); color: var(--space-ink); }
+  .program { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+  .program img { aspect-ratio: 1200 / 591; }
+  .credits { display: grid; gap: 10px; margin-top: 28px; font: 400 17px/1.5 var(--font-body); color: var(--ink-2); }
+  .cards { display: grid; gap: 24px; margin-top: 56px; }
+  .cards.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards li { border: 1px solid var(--line-1); border-top: 6px solid var(--stream-1); padding: 24px; background: var(--paper-0); display: grid; gap: 12px; align-content: start; }
+  .services { display: grid; gap: 40px; margin-top: 56px; }
+  .services li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+  .services li:nth-child(even) img { order: 2; }
+  .services img { aspect-ratio: 16 / 9; }
+  .services .body { display: grid; gap: 12px; }
+  .member { margin-top: 40px; max-width: 820px; display: grid; gap: 16px; border-left: 6px solid var(--stream-1); padding-left: 24px; }
+  .member-price { font: 700 22px/1.35 var(--font-display); color: var(--space-ink); }
+  .member ul { display: grid; gap: 10px; font: 400 17px/1.5 var(--font-body); color: var(--ink-2); }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
+  @media (max-width: 900px) {
+    .program, .services li { grid-template-columns: 1fr; gap: var(--space-5); }
+    .services li:nth-child(even) img { order: 0; }
+    .cards.three { grid-template-columns: 1fr; }
+    .cards, .services { margin-top: var(--space-6); }
+  }
+</style>

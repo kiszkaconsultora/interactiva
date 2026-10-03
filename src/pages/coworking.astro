@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import Tag from '../components/core/Tag.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { rooms, equipment, otherSpaces, priceNote } from '../data/coworking';
+import { unitBySlug } from '../data/units';
+
+const unit = unitBySlug('coworking');
+---
+
+<BaseLayout
+  title="Coworking · Interactiva Hub"
+  description="Espacios de coworking, salas de reuniones y capacitación en Av. Edison 636, Resistencia, Chaco. Tarifas por hora, jornada y paquetes."
+>
+  <UnitHero
+    title="Espacios de Coworking"
+    lead={unit.description}
+    eyebrow="Interactiva Coworking"
+    logo={unit.logo}
+    logoAlt="Logo de Interactiva Coworking"
+    accent={unit.accent}
+  >
+    <Tag color="var(--cowork-2)">-20% de descuento a clientes frecuentes</Tag>
+    <Tag color="var(--cowork-2)">-20% de descuento a clientes de la comunidad</Tag>
+  </UnitHero>
+
+  <Section labelledby="salas-title">
+    <div id="salas-title">
+      <SectionHeading eyebrow="Salas y tarifas" title="Elegí tu espacio" lead={priceNote} accent={unit.solid} />
+    </div>
+    <div class="rooms">
+      {
+        rooms.map((r) => (
+          <article class="room" id={r.id}>
+            <img src={r.image} alt={r.imageAlt} loading="lazy" />
+            <div class="room-body">
+              <h3>{r.name}</h3>
+              {r.capacity && <p class="capacity">Capacidad: {r.capacity}</p>}
+              {r.equipment && <p>{r.equipment}</p>}
+              {r.description && <p>{r.description}</p>}
+              {r.notes?.map((n) => <p>{n}</p>)}
+              {
+                r.prices && (
+                  <table>
+                    <caption class="sr">Valor por {r.name}</caption>
+                    <tbody>
+                      {r.prices.map((p) => (
+                        <tr>
+                          <th scope="row">{p.label}{p.note && <small>{p.note}</small>}</th>
+                          <td>{p.price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )
+              }
+              {r.pdf && <Button href={r.pdf} variant="secondary" size="sm" iconRight="→">Ver tarifa en PDF</Button>}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="equip-title">
+    <div id="equip-title"><SectionHeading eyebrow="Salas" title="Equipamiento" accent={unit.solid} /></div>
+    <ul class="gallery">
+      {
+        equipment.map((e) => (
+          <li>
+            <img src={e.src} alt={e.alt} loading="lazy" />
+            <span>{e.caption}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section labelledby="otros-title">
+    <div id="otros-title"><SectionHeading eyebrow="Más espacios" title="Para cada tipo de encuentro" accent={unit.solid} /></div>
+    <div class="others">
+      {
+        otherSpaces.map((s) => (
+          <article>
+            <h3>{s.name}</h3>
+            <div class="ideal">Ideal para {s.ideal}</div>
+            <p>{s.text}</p>
+          </article>
+        ))
+      }
+    </div>
+    <div class="hours">
+      <Tag>Lun a Vie · 9:00 a 18:00 hs</Tag>
+      <Tag>Av. Edison 636, Resistencia, Chaco</Tag>
+    </div>
+  </Section>
+
+  <ContactBlock email={unit.email!} emailLabel="Interactiva Coworking" accent={unit.solid} />
+</BaseLayout>
+
+<style>
+  .rooms { display: grid; gap: 56px; margin-top: 56px; }
+  .room { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .room:nth-child(even) img { order: 2; }
+  .room img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+  .room-body { display: grid; gap: 14px; justify-items: start; width: 100%; }
+  h3 { font: var(--type-h3); color: var(--space-ink); }
+  p { font: 400 16px/1.5 var(--font-body); color: var(--ink-2); }
+  .capacity { font-weight: 500; color: var(--space-ink); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 10px 0; border-top: 1px solid var(--line-1); text-align: left; font: 400 16px/1.3 var(--font-body); }
+  th small { display: block; color: var(--ink-3); font-size: 13px; }
+  td { text-align: right; font-weight: 700; color: var(--space-ink); white-space: nowrap; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .gallery { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+  .gallery span { display: block; margin-top: 10px; font: 500 16px var(--font-body); color: var(--space-ink); }
+  .others { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+  .others article { border: 1px solid var(--line-1); border-top: 6px solid var(--cowork-2); padding: 24px; display: grid; gap: 10px; background: var(--paper-0); }
+  .ideal { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  .hours { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 40px; }
+  @media (max-width: 900px) {
+    .room { grid-template-columns: 1fr; gap: var(--space-5); }
+    .room:nth-child(even) img { order: 0; }
+    .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .others { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .gallery { grid-template-columns: 1fr; }
+  }
+</style>

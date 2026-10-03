@@ -1,0 +1,38 @@
+---
+import Section from './Section.astro';
+import SectionHeading from './SectionHeading.astro';
+import Button from '../core/Button.astro';
+import { contact } from '../../data/site';
+
+interface Props {
+  email: string;
+  emailLabel?: string;
+  accent?: string;
+  title?: string;
+  lead?: string;
+}
+const { email, emailLabel, accent = 'var(--ink-0)', title = 'Contacto', lead } = Astro.props;
+---
+
+<Section background="sky" labelledby="contact-title">
+  <div class="contact">
+    <div id="contact-title"><SectionHeading eyebrow="Escribinos" title={title} lead={lead} accent={accent} /></div>
+    <dl>
+      <div><dt>{emailLabel ?? 'Email'}</dt><dd><a href={`mailto:${email}`}>{email}</a></dd></div>
+      <div><dt>Teléfono</dt><dd><a href={contact.phoneHref}>{contact.phoneDisplay}</a></dd></div>
+      <div><dt>Dirección</dt><dd>{contact.address}</dd></div>
+    </dl>
+    <div class="actions">
+      <Button href={contact.whatsappHref} iconRight="→">Escribinos por WhatsApp</Button>
+      <Button href="/contacto" variant="secondary">Agendá una reunión</Button>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .contact { display: grid; gap: 32px; }
+  dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin: 0; }
+  dt { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  dd { margin: 0; font: 400 18px/1.4 var(--font-body); color: var(--space-ink); overflow-wrap: anywhere; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+</style>
