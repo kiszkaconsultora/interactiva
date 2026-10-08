@@ -1,7 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import { withBase } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/core/Button.astro';
+import ArticleCard from '../components/marketing/ArticleCard.astro';
 import Tag from '../components/core/Tag.astro';
 import Planet from '../components/marketing/Planet.astro';
 import ProfileCard from '../components/marketing/ProfileCard.astro';
@@ -13,6 +15,10 @@ import StepItem from '../components/marketing/StepItem.astro';
 import { units, ecosystem } from '../data/units';
 import { profiles, helpVerbs, allies } from '../data/profiles';
 import { contact, nasaImages } from '../data/site';
+
+const latestArticles = (await getCollection('radar', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -75,6 +81,32 @@ import { contact, nasaImages } from '../data/site';
       </ul>
     </div>
   </Section>
+
+  {
+    latestArticles.length > 0 && (
+      <Section labelledby="radar-title">
+        <div id="radar-title">
+          <SectionHeading eyebrow="Radar" title="Últimas notas" accent="var(--sky-4)" />
+        </div>
+        <div class="radar-grid">
+          {latestArticles.map((a) => (
+            <ArticleCard
+              href={`/radar/${a.id}`}
+              title={a.data.title}
+              excerpt={a.data.excerpt}
+              category={a.data.category}
+              date={a.data.date}
+              image={a.data.image}
+              imageAlt={a.data.imageAlt}
+            />
+          ))}
+        </div>
+        <div class="radar-actions">
+          <Button href="/radar" variant="secondary" iconRight="→">Ver todas las notas</Button>
+        </div>
+      </Section>
+    )
+  }
 
   <SpaceHero background="dawn" minHeight={0}>
     <div class="dit-preview">
@@ -149,6 +181,8 @@ import { contact, nasaImages } from '../data/site';
   .profiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
   .help-label { margin: 48px 0 8px; font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
   .verbs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; }
+  .radar-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 56px; background: var(--line-1); }
+  .radar-actions { margin-top: 40px; }
   .units { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
   .ecosystem { margin-top: 56px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; border-top: 1px solid var(--line-1); padding-top: 32px; }
   .eco-label { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
@@ -172,6 +206,7 @@ import { contact, nasaImages } from '../data/site';
   @media (max-width: 1100px) {
     .profiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .units { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .radar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 900px) {
     .hero, .dit-preview, .space { grid-template-columns: 1fr; gap: var(--space-6); }
@@ -184,4 +219,5 @@ import { contact, nasaImages } from '../data/site';
     .photos .big { height: 260px; }
     .photos img { height: 140px; }
   }
+  @media (max-width: 560px) { .radar-grid { grid-template-columns: 1fr; } }
 </style>

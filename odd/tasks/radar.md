@@ -28,6 +28,9 @@ The client will publish articles periodically. Content must be added by dropping
 ## Tasks
 - [x] T1 — Content collection, `/radar` index, `/radar/[slug]` page, header link, authoring template. Route: delegated (writer trigger: 4+ non-trivial files).
 
+- [x] T2 — First 3 articles (Sesiones de Proyectos videos) with WebP images. Route: delegated (research + 3 files).
+- [x] T3 — Home shows the latest 3 published articles. Route: inline (single file).
+
 ## Acceptance criteria
 - A new `.md` in `src/content/radar/` appears on `/radar` and at `/radar/<file-name>` after build.
 - `_plantilla.md` is not published.
@@ -37,6 +40,10 @@ The client will publish articles periodically. Content must be added by dropping
 ## Progress / Evidence
 - 2026-10-08: feature document created. Engram mirror `odd/radar/tasks`: pending (mem_save failed: host session registration not confirmed).
 - 2026-10-08: T1 done (delegated writer). Evidence: `npm run check` 0 errors (parent re-ran); `npm run build` OK, `dist/radar/index.html` shows empty state, no `_plantilla` page; probe article generated `dist/radar/prueba-temporal/` and was listed, `draft: true` hid it; header "Radar" active on radar pages. Probe file removed. Added `public/radar/.gitkeep`. Index title chosen by writer: "Lo que pasa en el ecosistema".
+
+- 2026-10-08: T2 done (delegated writer, commit 1b857a0). Articles from auto-captions + video descriptions; uncertain names omitted. Check/build OK, 3 pages generated, newest first.
+- 2026-10-08: Custom domain config (site https://interactiv.ar, no base) committed on main as 78d4509, NOT pushed: setting the Pages custom domain needs repo admin (user facundouferer has push only).
+- 2026-10-08: T3 done (inline). `npm run check` 0 errors; build OK; dist/index.html links the 3 articles; verified visually.
 
 ## Next step
 User review of `/radar`; first real article. Optional follow-up: move the duplicated Spanish date formatter (ArticleCard.astro, radar/[slug].astro) to src/utils/.
