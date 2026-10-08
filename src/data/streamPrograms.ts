@@ -6,6 +6,8 @@ export interface StreamProgram {
   /** Short name used on cards (as shown in the source). */
   tagline: string;
   description?: string;
+  /** Short summary (max 140 chars) shown on the /stream program cards. */
+  synopsis: string;
   credits: { role: string; value: string }[];
   banner?: string;
   bannerAlt?: string;
@@ -33,6 +35,7 @@ export const streamPrograms: StreamProgram[] = [
     slug: 'desafio-emprendedor',
     name: 'Desafío Emprendedor',
     tagline: 'Vidriera Digital del Talento Chaqueño',
+    synopsis: 'Entrevistas semanales a emprendedores chaqueños sobre moda, diseño, comunicación, ventas y música. Una vidriera digital del talento local.',
     description: 'Todas las semanas entrevistamos a emprendedores locales.',
     credits: [
       { role: 'Conducción y Producción', value: 'Esp. María José Kiszka' },
@@ -56,6 +59,7 @@ export const streamPrograms: StreamProgram[] = [
     slug: 'error-404',
     name: 'Error 404',
     tagline: 'Vínculos humanos 2.0 mediados por tecnología.',
+    synopsis: 'Charlas sobre vínculos humanos en la era digital: apps de citas, algoritmos y consejos para relacionarnos mejor a través de la tecnología.',
     description: 'Todas las semanas.',
     credits: [
       { role: 'Conducción y Producción', value: 'Esp. Cecilia Vallejos' },
@@ -76,6 +80,7 @@ export const streamPrograms: StreamProgram[] = [
     slug: 'interactiva-diario',
     name: 'Interactiva Diario',
     tagline: 'Ventana virtual de emprendedores chaqueños',
+    synopsis: 'Todos los días visibilizamos emprendedores locales, para fortalecer su desarrollo comercial.',
     description: 'Todos los días visibilizamos emprendedores locales, para fortalecer su desarrollo comercial.',
     credits: [
       { role: 'Conducción y Producción', value: 'Esp. María José Kiszka' },
@@ -94,6 +99,7 @@ export const streamPrograms: StreamProgram[] = [
     slug: 'magia',
     name: 'magIA',
     tagline: 'Desarrollos tecnológicos chaqueños en la era de la IA',
+    synopsis: 'Conversaciones con desarrolladores y empresas chaqueñas sobre tecnología e innovación en tiempos de inteligencia artificial.',
     credits: [
       { role: 'Conducción y Producción', value: 'Esp. María José Kiszka' },
       { role: 'Op. Técnica', value: 'Soledad Mansilla' },
@@ -112,6 +118,7 @@ export const streamPrograms: StreamProgram[] = [
     slug: 'sesiones-de-proyecto',
     name: 'Sesiones de Proyecto',
     tagline: 'Entrevistamos a emprendedores locales con una mirada transdisciplinar e innovadora.',
+    synopsis: 'Estudios y empresas de la región presentan sus proyectos: arquitectura, steel framing, bioconstrucción, metalurgia y diseño BIM.',
     description: 'Entrevistamos a emprendedores locales con una mirada transdisciplinar e innovadora. de Resistencia, Chaco y alrededores',
     credits: [
       { role: 'Conducción', value: 'Sonia Rodriguez' },
@@ -130,6 +137,7 @@ export const streamPrograms: StreamProgram[] = [
     slug: 'teatro-de-resistencia',
     name: 'Teatro de Resistencia',
     tagline: 'Agenda teatral de Resistencia, Chaco y alrededores',
+    synopsis: 'Grupos, elencos y artistas de Resistencia hablan de su obra: teatro musical, danza, improvisación, bufón y la agenda teatral local.',
     description: 'AGENDA TEATRAL de Resistencia, Chaco y alrededores',
     credits: [
       { role: 'Conducción', value: 'Arq. Sebastián Pérez' },

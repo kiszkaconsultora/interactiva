@@ -117,16 +117,3 @@ export const equipment = [
   { src: '/images/coworking/cocina-equipada.webp', caption: 'Cocina Equipada', alt: 'Cocina con cafeteras, microondas y vasos' },
   { src: '/images/coworking/coffee-break.webp', caption: 'Coffee Break', alt: 'Mesa de catering con el cartel del coworking' },
 ];
-
-export const otherSpaces = [
-  {
-    name: 'Sala IT',
-    ideal: 'Encuentros equipos IT',
-    text: 'Oficina con 4 sillas ergonómicas, pizarras, Wifi de alta velocidad. Privacidad, cocina equipada y servicio de limpieza incluido.',
-  },
-  {
-    name: 'Sala Phygital',
-    ideal: 'Digitalización de servicios',
-    text: 'Oficinas totalmente equipadas para grabación de Podcast / Producciones Audiovisuales en formato virtual, sincrónico o asincrónico.',
-  },
-];

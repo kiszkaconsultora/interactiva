@@ -44,7 +44,12 @@ const unit = unitBySlug('stream');
 
   <Section labelledby="videos-title">
     <div id="videos-title">
-      <SectionHeading eyebrow="Episodios" title={program.videosHeading} accent={unit.solid} />
+      <SectionHeading
+        eyebrow="Episodios"
+        title={program.videosHeading}
+        href={program.playlistId && `https://www.youtube.com/playlist?list=${program.playlistId}`}
+        accent={unit.solid}
+      />
     </div>
     {program.playlistId ? (
       <div class="playlist">
