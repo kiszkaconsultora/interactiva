@@ -13,6 +13,7 @@ export const navLinks: NavLink[] = [
   { label: 'Sesiones de Proyecto', href: '/sesiones-de-proyecto' },
   { label: 'Stream', href: '/stream' },
   { label: 'Productora', href: '/productora' },
+  { label: 'Radar', href: '/radar' },
   { label: 'Contacto', href: '/contacto' },
 ];
 

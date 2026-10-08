@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/marketing/Section.astro';
+import SectionHeading from '../../components/marketing/SectionHeading.astro';
+import ArticleCard from '../../components/marketing/ArticleCard.astro';
+
+const articles = (await getCollection('radar', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<BaseLayout
+  title="Radar · Interactiva Hub"
+  description="Notas y artículos sobre el ecosistema emprendedor, tecnológico y cultural del Chaco."
+  active="/radar"
+>
+  <Section labelledby="radar-title">
+    <div id="radar-title">
+      <SectionHeading
+        eyebrow="Radar"
+        title="Lo que pasa en el ecosistema"
+        lead="Notas y artículos sobre el ecosistema emprendedor, tecnológico y cultural del Chaco."
+      />
+    </div>
+    {
+      articles.length > 0 ? (
+        <div class="grid">
+          {articles.map((a) => (
+            <ArticleCard
+              href={`/radar/${a.id}`}
+              title={a.data.title}
+              excerpt={a.data.excerpt}
+              category={a.data.category}
+              date={a.data.date}
+              image={a.data.image}
+              imageAlt={a.data.imageAlt}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="empty">Pronto vas a encontrar acá las primeras notas.</p>
+      )
+    }
+  </Section>
+</BaseLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 56px; background: var(--line-1); }
+  .empty { margin-top: 56px; font: 400 var(--fs-lead) / 1.45 var(--font-body); color: var(--ink-2); }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--space-6); }
+    .empty { margin-top: var(--space-6); }
+  }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>
