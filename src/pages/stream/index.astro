@@ -2,6 +2,7 @@
 import { withBase } from '../../utils/url';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactBlock from '../../components/marketing/ContactBlock.astro';
+import DonationBlock from '../../components/marketing/DonationBlock.astro';
 import Section from '../../components/marketing/Section.astro';
 import SectionHeading from '../../components/marketing/SectionHeading.astro';
 import ServiceCard from '../../components/marketing/ServiceCard.astro';
@@ -49,6 +50,8 @@ const unit = unitBySlug('stream');
       }
     </div>
   </Section>
+
+  <DonationBlock />
 
   <ContactBlock email="desafioemprendedor.ok@gmail.com" emailLabel="Desafío Emprendedor e Interactiva Diario" accent={unit.solid} />
 </BaseLayout>

@@ -3,6 +3,7 @@ import { withBase } from '../../utils/url';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/core/Button.astro';
 import ContactBlock from '../../components/marketing/ContactBlock.astro';
+import DonationBlock from '../../components/marketing/DonationBlock.astro';
 import Section from '../../components/marketing/Section.astro';
 import SectionHeading from '../../components/marketing/SectionHeading.astro';
 import YouTubeFacade from '../../components/marketing/YouTubeFacade.astro';
@@ -69,6 +70,8 @@ const unit = unitBySlug('stream');
       </div>
     )}
   </Section>
+
+  <DonationBlock accent={program.accent} />
 
   <ContactBlock
     email={program.email ?? 'interactiva5.0@gmail.com'}

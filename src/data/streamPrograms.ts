@@ -22,6 +22,9 @@ export interface StreamProgram {
 
 const playlist = (id: string) => `https://www.youtube.com/playlist?list=${id}`;
 
+/** Mercado Pago link for viewer donations to the Stream. */
+export const donationLink = 'https://mpago.la/2iMa24h';
+
 export const streamIntro = {
   title: 'Stream',
   lead: 'El talento chaqueño merece ser visto y escuchado. En nuestro Stream de Interactiva Hub producimos contenidos que muestran la creatividad, la innovación y las historias que están transformando nuestra región. Es más que una transmisión: es una ventana abierta al futuro, donde las ideas locales se conectan con el mundo.',

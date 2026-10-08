@@ -1,0 +1,35 @@
+---
+import Button from '../core/Button.astro';
+import Section from './Section.astro';
+import SectionHeading from './SectionHeading.astro';
+import { donationLink } from '../../data/streamPrograms';
+
+interface Props {
+  accent?: string;
+}
+const { accent = 'var(--stream-1)' } = Astro.props;
+---
+
+<Section background="sky" labelledby="donation-title">
+  <div class="donation" style={`--accent:${accent}`}>
+    <div id="donation-title">
+      <SectionHeading
+        eyebrow="Apoyá el Stream"
+        title="Si nos mirás, ya sos parte. Ayudanos a seguir creando"
+        lead="Cada programa nace del trabajo y el cariño de un equipo que cree en el talento chaqueño. Si disfrutás nuestros contenidos, con tu aporte nos ayudás a producir más y mejores programas. Cualquier monto suma y nos llena de energía para seguir."
+        accent={accent}
+      />
+    </div>
+    <div class="actions">
+      <Button href={donationLink} size="lg" iconRight="→">Ingresá al link para colaborar</Button>
+      <p class="note">Pago seguro a través de Mercado Pago.</p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .donation { display: grid; gap: 32px; border-left: 6px solid var(--accent); padding-left: 32px; }
+  .actions { display: grid; gap: 12px; justify-items: start; }
+  .note { margin: 0; font: 400 14px/1.4 var(--font-body); color: var(--ink-3); }
+  @media (max-width: 560px) { .donation { padding-left: 20px; } }
+</style>
