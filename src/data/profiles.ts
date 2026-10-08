@@ -15,7 +15,7 @@ export const profiles: Profile[] = [
     audience: 'Empresas',
     title: 'Innovación estratégica',
     benefit: 'Empresas que buscan desarrollarse con perspectiva de innovación estratégica.',
-    href: '/gimnasio-de-innovacion',
+    href: '/gimnasio',
     cta: 'Entrenar mi empresa',
     accent: 'var(--seg-empresas)',
   },

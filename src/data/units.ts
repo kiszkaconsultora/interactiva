@@ -29,7 +29,7 @@ export const units: Unit[] = [
   },
   {
     slug: 'gimnasio-de-innovacion',
-    href: '/gimnasio-de-innovacion',
+    href: '/gimnasio',
     name: 'Gimnasio de Innovación',
     navLabel: 'GII 5.0',
     kicker: 'GII 5.0',

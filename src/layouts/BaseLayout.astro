@@ -12,7 +12,6 @@ const defaultColumns = [
     title: 'Unidades',
     links: [
       ...units.filter((u) => u.slug !== 'stream').map((u) => ({ label: u.name, href: u.href })),
-      { label: 'Entrenamientos (DIT)', href: '/entrenamientos' },
     ],
   },
   {
