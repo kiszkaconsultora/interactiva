@@ -1,14 +1,23 @@
 ---
 import { withBase } from '../../utils/url';
+interface NavItem {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+}
 interface Props {
-  links?: { label: string; href: string }[];
+  links?: NavItem[];
   active?: string;
   cta?: string;
   ctaHref?: string;
   homeHref?: string;
   inverse?: boolean;
 }
-const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = '/', inverse = false } = Astro.props;
+const { links = [], active, cta = 'Quiero info!', ctaHref = '/contacto', homeHref = '/', inverse = false } = Astro.props;
+const isItemActive = (l: NavItem) =>
+  l.label === active ||
+  l.href === active ||
+  (l.children?.some((c) => c.label === active || c.href === active) ?? false);
 ---
 
 <header class="header" data-inverse={inverse ? 'true' : undefined}>
@@ -26,11 +35,41 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
   <div class="menu" id="site-menu" data-menu>
     <nav class="nav" aria-label="Principal">
       {
-        links.map((l) => (
-          <a href={withBase(l.href)} class="link" data-on={l.label === active || l.href === active ? 'true' : undefined} aria-current={l.label === active || l.href === active ? 'page' : undefined}>
-            {l.label}
-          </a>
-        ))
+        links.map((l) =>
+          l.children && l.children.length > 0 ? (
+            <div class="nav-group">
+              <a
+                href={withBase(l.href)}
+                class="link has-sub"
+                data-on={isItemActive(l) ? 'true' : undefined}
+                aria-current={l.href === active ? 'page' : undefined}
+              >
+                {l.label} <span class="caret" aria-hidden="true">▾</span>
+              </a>
+              <div class="submenu" role="group" aria-label={l.label}>
+                {l.children.map((c) => (
+                  <a
+                    href={withBase(c.href)}
+                    class="sublink"
+                    data-on={c.label === active || c.href === active ? 'true' : undefined}
+                    aria-current={c.label === active || c.href === active ? 'page' : undefined}
+                  >
+                    {c.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={withBase(l.href)}
+              class="link"
+              data-on={isItemActive(l) ? 'true' : undefined}
+              aria-current={isItemActive(l) ? 'page' : undefined}
+            >
+              {l.label}
+            </a>
+          ),
+        )
       }
     </nav>
     <a class="cta" href={withBase(ctaHref)}>{cta}</a>
@@ -60,16 +99,51 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
   .word { font: 900 22px/1 var(--font-display); letter-spacing: -0.02em; }
   .hub { font: 500 13px/1 var(--font-condensed); letter-spacing: 0.2em; text-transform: uppercase; }
   .menu { display: flex; align-items: center; gap: 32px; margin-left: auto; }
-  .nav { display: flex; gap: 20px; flex-wrap: wrap; }
+  .nav { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .nav-group { position: relative; display: flex; align-items: center; }
   .link {
     font: 400 15px var(--font-body);
     color: var(--fg);
     text-decoration: none;
     padding-bottom: 4px;
     border-bottom: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
+  .caret { font-size: 11px; opacity: 0.75; }
   .link:hover { color: var(--fg); border-bottom-color: var(--fg); }
   .link[data-on='true'] { font-weight: 700; border-bottom-color: var(--fg); }
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 210px;
+    background: var(--paper-0);
+    border: 1px solid var(--line-1);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    padding: 8px 0;
+    z-index: 20;
+    flex-direction: column;
+  }
+  .header[data-inverse='true'] .submenu {
+    background: var(--surface-inverse);
+    border-color: var(--line-inv);
+  }
+  .nav-group:hover .submenu,
+  .nav-group:focus-within .submenu {
+    display: flex;
+  }
+  .sublink {
+    font: 400 14px var(--font-body);
+    color: var(--fg);
+    text-decoration: none;
+    padding: 8px 16px;
+    white-space: nowrap;
+  }
+  .sublink:hover { background: var(--sky-0); color: var(--fg); }
+  .sublink[data-on='true'] { font-weight: 700; }
   .cta {
     font: 500 14px var(--font-body);
     padding: 10px 16px;
@@ -128,7 +202,19 @@ const { links = [], active, cta = 'Contacto', ctaHref = '/contacto', homeHref = 
     }
     .header[data-inverse='true'] .menu { border-top-color: var(--line-inv); }
     .menu[data-open='true'] { display: flex; }
-    .nav { flex-direction: column; gap: var(--space-3); }
+    .nav { flex-direction: column; gap: var(--space-3); align-items: stretch; }
+    .nav-group { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .submenu {
+      display: flex;
+      position: static;
+      box-shadow: none;
+      border: 0;
+      border-left: 2px solid var(--line-1);
+      margin-left: 8px;
+      padding: 2px 0 2px 12px;
+      background: transparent;
+    }
+    .sublink { padding: 6px 0; }
     .link { padding: var(--space-2) 0; align-self: flex-start; }
     .cta { text-align: center; }
   }

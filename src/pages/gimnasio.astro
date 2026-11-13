@@ -231,13 +231,13 @@ const infra = [
       />
     </div>
     <div class="humano-actions">
-      <Button href="/contacto" iconRight="→">Agendá un diagnóstico</Button>
+      <Button href={unit.email ? '#contacto' : '/contacto'} iconRight="→">Quiero info!</Button>
     </div>
   </Section>
 
   <div id="contacto">
     <ContactBlock
-      email="kiskza.consultora@gmail.com"
+      email="interactivahub@gmail.com"
       emailLabel="Esp. María José Kiszka, Directora Ejecutiva · Gimnasio de Innovación"
       accent={unit.solid}
     />

@@ -28,14 +28,13 @@ const latestArticles = (await getCollection('radar', ({ data }) => !data.draft))
   <SpaceHero background="sky" minHeight={640}>
     <div class="hero">
       <div class="copy">
-        <div class="eyebrow">Bienvenidos</div>
-        <h1>Dale vida, escala e impacto a tu propuesta. El momento es hoy.</h1>
+        <div class="eyebrow">Interactiva Hub · Resistencia, Chaco</div>
+        <h1>Coworking, entrenamiento en innovación y producción de streaming.</h1>
         <p class="lead">
-          Las grandes ideas no prosperan en el aislamiento; necesitan un ecosistema que las impulse. Somos el laboratorio de innovación, tecnología y coworking diseñado para transformar visión en impacto. Emprendedores, estudiantes y empresas encuentran aquí el espacio para conectar, aprender y escalar.
+          Alquilá salas y puestos de trabajo equipados, entrená a tu equipo o empresa en innovación y tecnología, y producí tu podcast o programa en vivo desde nuestro estudio en Av. Edison 636.
         </p>
         <div class="actions">
-          <Button href="#perfiles" iconRight="↓">Elegí tu camino</Button>
-          <Button href="/contacto" variant="ghost">Agendá una reunión</Button>
+          <Button href="#perfiles" iconRight="↓">Caminemos tu desafío</Button>
         </div>
       </div>
       <div class="planets" aria-hidden="true">
@@ -46,7 +45,7 @@ const latestArticles = (await getCollection('radar', ({ data }) => !data.draft))
   </SpaceHero>
 
   <Section id="perfiles" labelledby="perfiles-title">
-    <h2 id="perfiles-title" class="block-title">¿Quién sos? Elegí tu camino</h2>
+    <h2 id="perfiles-title" class="block-title">Hay una solución para vos</h2>
     <div class="profiles">
       {profiles.map((p) => <ProfileCard {...p} />)}
     </div>
@@ -69,7 +68,7 @@ const latestArticles = (await getCollection('radar', ({ data }) => !data.draft))
 
   <Section id="servicios" labelledby="servicios-title">
     <div id="servicios-title">
-      <SectionHeading eyebrow="Servicios" title="Un mismo ecosistema, seis propuestas" accent="var(--sky-4)" />
+      <SectionHeading eyebrow="Servicios" title="Un mismo ecosistema, cinco propuestas" accent="var(--sky-4)" />
     </div>
     <div class="units">
       {units.map((u) => <ServiceCard href={u.href} name={u.name} kicker={u.kicker} description={u.description} logo={u.logo} accent={u.accent} />)}
@@ -77,7 +76,15 @@ const latestArticles = (await getCollection('radar', ({ data }) => !data.draft))
     <div class="ecosystem">
       <div class="eco-label">Ecosistema</div>
       <ul>
-        {ecosystem.map((e) => <li><img src={withBase(e.logo)} alt={e.name} loading="lazy" /></li>)}
+        {
+          ecosystem.map((e) => (
+            <li>
+              <a href={withBase(e.href)} title={e.name}>
+                <img src={withBase(e.logo)} alt={e.name} loading="lazy" />
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </Section>
@@ -163,7 +170,7 @@ const latestArticles = (await getCollection('radar', ({ data }) => !data.draft))
     <div class="final">
       <h2>Transformemos juntos el conocimiento en oportunidades de negocio.</h2>
       <p>Estamos a un mensaje de distancia para concretar un diagnóstico personalizado.</p>
-      <Button size="lg" href="/contacto" iconRight="→">Agendá una reunión</Button>
+      <Button size="lg" href={contact.whatsappHref} iconRight="→">Quiero info!</Button>
     </div>
   </SpaceHero>
 </BaseLayout>

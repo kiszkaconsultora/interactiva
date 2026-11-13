@@ -28,11 +28,12 @@ import { contact, emails } from '../data/site';
           <div><dt>Dirección</dt><dd>{contact.address}</dd></div>
           <div><dt>Horario</dt><dd>{contact.hours}</dd></div>
           <div><dt>Teléfono</dt><dd><a href={contact.phoneHref}>{contact.phoneDisplay}</a></dd></div>
+          <div><dt>Correo</dt><dd><a href={`mailto:${contact.mainEmail}`}>{contact.mainEmail}</a></dd></div>
         </dl>
-        <div><Button href={contact.whatsappHref} iconRight="→">Escribinos por WhatsApp</Button></div>
+        <div><Button href={contact.whatsappHref} iconRight="→">Quiero info!</Button></div>
       </div>
       <div class="emails-column">
-        <h2 id="emails-title">Emails por unidad</h2>
+        <h2 id="emails-title">Correo general</h2>
         <ul class="emails">
           {emails.map((e) => <li><span>{e.label}</span><a href={`mailto:${e.email}`}>{e.email}</a></li>)}
         </ul>

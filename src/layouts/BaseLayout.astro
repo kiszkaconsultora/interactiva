@@ -3,7 +3,7 @@ import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
 import { stripBase, withBase } from '../utils/url';
-import { navLinks as defaultNav, contact, emails } from '../data/site';
+import { navLinks as defaultNav, contact, type NavLink } from '../data/site';
 import { units, ecosystem } from '../data/units';
 import { streamPrograms } from '../data/streamPrograms';
 
@@ -11,7 +11,8 @@ const defaultColumns = [
   {
     title: 'Unidades',
     links: [
-      ...units.filter((u) => u.slug !== 'stream').map((u) => ({ label: u.name, href: u.href })),
+      ...units.filter((u) => u.slug !== 'stream').map((u) => ({ label: u.navLabel || u.name, href: u.href })),
+      ...ecosystem.map((e) => ({ label: e.name, href: e.href })),
     ],
   },
   {
@@ -23,8 +24,8 @@ const defaultColumns = [
     links: [
       { label: contact.phoneDisplay, href: contact.phoneHref },
       { label: 'WhatsApp', href: contact.whatsappHref },
-      ...emails.map((e) => ({ label: `${e.label}: ${e.email}`, href: `mailto:${e.email}` })),
-      { label: 'Formulario de contacto', href: '/contacto' },
+      { label: contact.mainEmail, href: `mailto:${contact.mainEmail}` },
+      { label: 'Contacto', href: contact.whatsappHref },
     ],
   },
 ];
@@ -35,7 +36,7 @@ const defaultMarks = [...units.map((u) => ({ src: u.logo, alt: u.name })), ...ec
 interface Props {
   title: string;
   description?: string;
-  navLinks?: { label: string; href: string }[];
+  navLinks?: NavLink[];
   active?: string;
   cta?: string;
   ctaHref?: string;
@@ -48,16 +49,19 @@ const {
   description = 'Interactiva Hub: coworking e innovación en Resistencia, Chaco.',
   navLinks = defaultNav,
   active,
-  cta = 'Agendá una reunión',
-  ctaHref = '/contacto',
+  cta = 'Quiero info!',
+  ctaHref = contact.whatsappHref,
   footerColumns = defaultColumns,
   footerMarks = defaultMarks,
 } = Astro.props;
 
 const path = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
+const matchHref = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
+const matchedChild = navLinks.flatMap((l) => l.children ?? []).find((c) => matchHref(c.href));
 const current =
   active ??
-  navLinks.find((l) => (l.href === '/' ? path === '/' : path === l.href || path.startsWith(l.href + '/')))?.href;
+  matchedChild?.href ??
+  navLinks.find((l) => matchHref(l.href))?.href;
 ---
 
 <!doctype html>
@@ -72,10 +76,52 @@ const current =
   <body>
     <SiteHeader links={navLinks} active={current} cta={cta} ctaHref={ctaHref} />
     <main><slot /></main>
-    <SiteFooter columns={footerColumns} marks={footerMarks} />
+    <SiteFooter columns={footerColumns} marks={footerMarks} email={contact.mainEmail} />
+    <a
+      class="wa-float"
+      href={contact.whatsappHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escribinos por WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.13.11-1.83-.11-.42-.13-.97-.31-1.67-.61-2.94-1.27-4.86-4.23-5.01-4.43-.15-.2-1.2-1.59-1.2-3.04 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4.01.57.01.18 0 .43-.07.67.51.24.59.83 2.03.9 2.18.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.31 2.38 1.46.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.34.07.13.07.72-.17 1.4z" />
+      </svg>
+      <span>WhatsApp</span>
+    </a>
   </body>
 </html>
 
 <style is:global>
   html { overflow-x: hidden; }
+  .wa-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #25d366;
+    color: #fff;
+    font: 600 15px/1 var(--font-body);
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.24);
+    transition: transform var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .wa-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.32);
+    color: #fff;
+  }
+  @media (max-width: 600px) {
+    .wa-float {
+      right: 16px;
+      bottom: 16px;
+      padding: 12px 15px;
+      font-size: 14px;
+    }
+  }
 </style>

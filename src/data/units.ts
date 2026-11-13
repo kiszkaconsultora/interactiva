@@ -25,7 +25,7 @@ export const units: Unit[] = [
     logo: '/logos/coworking.png',
     accent: 'var(--grad-cowork)',
     solid: 'var(--cowork-2)',
-    email: 'interactivacoworking@gmail.com',
+    email: 'interactivahub@gmail.com',
   },
   {
     slug: 'gimnasio-de-innovacion',
@@ -38,32 +38,20 @@ export const units: Unit[] = [
     logo: '/logos/gii50.png',
     accent: 'var(--grad-gii)',
     solid: 'var(--gii-2)',
-    email: 'kiskza.consultora@gmail.com',
+    email: 'interactivahub@gmail.com',
   },
   {
     slug: 'kiszka',
     href: '/kiszka',
     name: 'Kiszka Consultora I+D+i+V',
-    navLabel: 'Kiszka',
-    kicker: 'Consultora',
+    navLabel: 'Consultoría',
+    kicker: 'Consultoría',
     description:
       'Fusionar ciencia, estrategia y bienestar para generar servicios de vinculación tecnológica, innovación y desarrollo de negocios.',
-    logo: '/logos/lab-idiv.png',
+    logo: '/logos/logo Kiszka Consultora I+D+i+V.png',
     accent: 'var(--grad-lab)',
     solid: 'var(--lab-3)',
-    email: 'kiskza.consultora@gmail.com',
-  },
-  {
-    slug: 'sesiones-de-proyecto',
-    href: '/sesiones-de-proyecto',
-    name: 'Sesiones de Proyecto',
-    navLabel: 'Sesiones de Proyecto',
-    kicker: 'Diseño',
-    description: 'Servicios de Asistencia Primaria en Diseño para Apasionados.',
-    logo: '/logos/sesiones-de-proyecto.png',
-    accent: 'var(--ink-0)',
-    solid: 'var(--ink-0)',
-    email: 'sesionesdeproyecto@gmail.com',
+    email: 'interactivahub@gmail.com',
   },
   {
     slug: 'stream',
@@ -75,6 +63,7 @@ export const units: Unit[] = [
     logo: '/logos/stream.png',
     accent: 'var(--grad-stream)',
     solid: 'var(--stream-2)',
+    email: 'interactivahub@gmail.com',
   },
   {
     slug: 'productora',
@@ -87,18 +76,53 @@ export const units: Unit[] = [
     logo: '/logos/stream.png',
     accent: 'var(--stream-1)',
     solid: 'var(--stream-1)',
-    email: 'interactiva5.0@gmail.com',
+    email: 'interactivahub@gmail.com',
+  },
+];
+
+export const ecosystem: Unit[] = [
+  {
+    slug: 'sesiones-de-proyecto',
+    href: '/sesiones-de-proyecto',
+    name: 'Sesiones de Proyecto',
+    navLabel: 'Sesiones de Proyecto',
+    kicker: 'Diseño',
+    description: 'Servicios de Asistencia Primaria en Diseño para Apasionados.',
+    logo: '/logos/sesiones-de-proyecto.png',
+    accent: 'var(--ink-0)',
+    solid: 'var(--ink-0)',
+    email: 'interactivahub@gmail.com',
+  },
+  {
+    slug: 'artefacto',
+    href: '/artefacto',
+    name: 'Artefacto',
+    navLabel: 'Artefacto',
+    kicker: 'Laboratorio Creativo',
+    description:
+      'Tu laboratorio de arte, diseño y tecnología. Experiencias que impulsan el desarrollo de las Industrias Creativas y Culturales Chaqueñas.',
+    logo: '/logos/artefacto.png',
+    accent: 'var(--grad-cowork)',
+    solid: 'var(--cowork-2)',
+    email: 'interactivahub@gmail.com',
+  },
+  {
+    slug: 'integrapsiinn',
+    href: '/integrapsiinn',
+    name: 'INTEGRAPSIINN',
+    navLabel: 'INTEGRAPSIINN',
+    kicker: 'Bienestar e Innovación',
+    description:
+      'Intervenciones grupales con encuadre técnico-operativo-terapéutico que potencian el rendimiento de equipos cuidando el bienestar.',
+    logo: '/logos/integrapsiinn.png',
+    accent: 'var(--grad-lab)',
+    solid: 'var(--lab-3)',
+    email: 'interactivahub@gmail.com',
   },
 ];
 
 export const unitBySlug = (slug: string) => {
-  const u = units.find((x) => x.slug === slug);
+  const u = [...units, ...ecosystem].find((x) => x.slug === slug);
   if (!u) throw new Error(`Unknown unit: ${slug}`);
   return u;
 };
-
-// Logos only, no page yet (D1).
-export const ecosystem = [
-  { name: 'Artefacto', logo: '/logos/artefacto.png' },
-  { name: 'Integra psiinn', logo: '/logos/integrapsiinn.png' },
-];

@@ -2,15 +2,23 @@
 export interface NavLink {
   label: string;
   href: string;
+  children?: { label: string; href: string }[];
 }
 
 export const navLinks: NavLink[] = [
   { label: 'Inicio', href: '/' },
   { label: 'Coworking', href: '/coworking' },
-  { label: 'Gimnasio', href: '/gimnasio' },
-  { label: 'Kiszka', href: '/kiszka' },
-  { label: 'Sesiones de Proyecto', href: '/sesiones-de-proyecto' },
   { label: 'Stream', href: '/stream' },
+  { label: 'Gimnasio', href: '/gimnasio' },
+  {
+    label: 'Consultoría',
+    href: '/kiszka',
+    children: [
+      { label: 'Sesiones de Proyecto', href: '/sesiones-de-proyecto' },
+      { label: 'Artefacto', href: '/artefacto' },
+      { label: 'INTEGRAPSIINN', href: '/integrapsiinn' },
+    ],
+  },
   { label: 'Productora', href: '/productora' },
   { label: 'Radar', href: '/radar' },
   { label: 'Contacto', href: '/contacto' },
@@ -22,8 +30,9 @@ export const contact = {
   phone: '3624261185',
   phoneDisplay: '3624-261185',
   phoneHref: 'tel:+543624261185',
-  whatsappHref: 'https://wa.me/543624261185',
-  mainEmail: 'interactivacoworking@gmail.com',
+  whatsappHref:
+    'https://wa.me/543624261185?text=Hola!%20Vengo%20desde%20la%20web%20de%20Interactiva%20Hub%20y%20quiero%20hacer%20una%20consulta.',
+  mainEmail: 'interactivahub@gmail.com',
 } as const;
 
 export interface UnitEmail {
@@ -31,14 +40,8 @@ export interface UnitEmail {
   email: string;
 }
 
-// One entry per email address, labeled by unit/program (D4).
 export const emails: UnitEmail[] = [
-  { label: 'Interactiva Coworking', email: 'interactivacoworking@gmail.com' },
-  { label: 'GII 5.0, magIA y Productora', email: 'interactiva5.0@gmail.com' },
-  { label: 'Kiszka Consultora I+D+i+V', email: 'kiskza.consultora@gmail.com' },
-  { label: 'Sesiones de Proyecto', email: 'sesionesdeproyecto@gmail.com' },
-  { label: 'Desafío Emprendedor e Interactiva Diario', email: 'desafioemprendedor.ok@gmail.com' },
-  { label: 'Error 404', email: 'error404stream.ok@gmail.com' },
+  { label: 'Interactiva Hub', email: 'interactivahub@gmail.com' },
 ];
 
 export const nasa = (id: string) => `https://images-assets.nasa.gov/image/${id}/${id}~medium.jpg`;

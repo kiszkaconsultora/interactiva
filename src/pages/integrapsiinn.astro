@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import Tag from '../components/core/Tag.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import StepItem from '../components/marketing/StepItem.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { unitBySlug } from '../data/units';
+import { contact } from '../data/site';
+
+const unit = unitBySlug('integrapsiinn');
+
+const team = [
+  {
+    name: 'Lic. Cecilia Vallejos',
+    role: 'Licenciada en Psicología',
+    href: 'https://www.instagram.com/licenciadaceciliavallejos/',
+    linkLabel: 'Instagram →',
+  },
+  {
+    name: 'Esp. María José Kiszka',
+    role: 'Diseño Estratégico de la Innovación y Vinculación Tecnológica',
+    href: 'https://www.linkedin.com/in/mariajosekiszka/',
+    linkLabel: 'LinkedIn →',
+  },
+];
+
+const labSteps = [
+  {
+    title: 'Construcción de encuadre',
+    description: 'Normas consensuadas que regulan el trabajo del equipo.',
+  },
+  {
+    title: 'Resonancias',
+    description: 'Se trabaja con las particularidades con las que llegan los miembros del grupo.',
+  },
+  {
+    title: 'Objetivos del encuentro',
+    description: 'Se establecen de forma clara según la estrategia general de la organización.',
+  },
+  {
+    title: 'Dinámica',
+    description: 'Contamos con más de 50 dinámicas que se adaptan al objetivo específico del encuentro.',
+  },
+  {
+    title: 'Ritual de cierre e Informe de Resultados',
+    description: 'Síntesis grupal, registro del proceso y devolución estratégica.',
+  },
+];
+
+const pricing = [
+  {
+    name: 'Diagnóstico Inicial',
+    detail: 'Entrevista con responsables/referentes del equipo: escucha activa y observación, registro del proceso, informe, diseño de estrategia y presupuesto.',
+    duration: '2 hs de trabajo',
+    values: [
+      { label: 'Diagnóstico inicial', price: '$180.000.-' },
+      { label: 'Equipos de 6 a 24 integrantes (1 sesión)', price: '$300.000.-' },
+    ],
+  },
+  {
+    name: 'Laboratorios Sociales',
+    detail: 'Sesiones grupales con encuadre técnico-operativo-terapéutico de gestión del cambio a escala humana e informe de resultados.',
+    duration: '2 hs de trabajo',
+    values: [
+      { label: 'Equipos hasta 12 integrantes', price: '$280.000.-' },
+      { label: 'Equipos hasta 24 integrantes', price: '$360.000.-' },
+    ],
+  },
+];
+
+const servicesList = [
+  'Liderazgo estratégico',
+  'Bienestar laboral',
+  'Comunicación asertiva',
+  'Clima laboral',
+  'Empatía grupal',
+  'Creatividad',
+  'Equipos de alto rendimiento',
+  'Cohesión grupal',
+  'Inteligencia emocional',
+  'Lentes Violeta',
+  'Emociones productivas (tragedia + distancia = humor)',
+  'Habilidades de cooperación',
+];
+
+const toolCategories = [
+  {
+    title: 'Herramientas de observación',
+    items: 'Observación + Cuestionario + Encuesta + Entrevista',
+  },
+  {
+    title: 'Herramientas de evaluación',
+    items: 'Indicadores + Exámenes',
+  },
+  {
+    title: 'Herramientas de intervención',
+    items: 'Dinámicas + Técnicas + Entrenamientos',
+  },
+];
+
+const diagnosticIndicators = [
+  {
+    group: 'Indicadores del Clima Laboral',
+    items: ['Funcionamiento aceptable', 'Riesgo Organizacional', 'Riesgo Inminente'],
+  },
+  {
+    group: 'Indicadores vinculares en función del Bienestar',
+    items: ['Respeto', 'Empatía', 'Interacción', 'Comunicación', 'Cooperación'],
+  },
+  {
+    group: 'Indicadores Individuales',
+    items: ['Iniciativa', 'Compromiso', 'Responsabilidad', 'Participación', 'Empatía', 'Pertenencia'],
+  },
+  {
+    group: 'Capacidades en función del perfil del equipo',
+    items: ['Tipo de liderazgo', 'Definición de roles', 'Manejo de la información', 'Distribución de tareas'],
+  },
+];
+---
+
+<BaseLayout
+  title="INTEGRAPSIINN · Consultoría y Bienestar · Interactiva Hub"
+  description="Intervenciones que potencian el rendimiento de equipos sin descuidar el bienestar. Gestión del cambio a escala humana para empresas y organizaciones."
+>
+  <UnitHero
+    title="INTEGRAPSIINN"
+    eyebrow="Consultoría · Psicología e Innovación"
+    lead="Diseñamos intervenciones que potencian el rendimiento de equipos sin descuidar el Bienestar. Sesiones grupales con un encuadre técnico-operativo-terapéutico de gestión del cambio a escala humana."
+    logo={unit.logo}
+    logoAlt="Logo de INTEGRAPSIINN"
+    accent={unit.accent}
+  >
+    <Button href={contact.whatsappHref} iconRight="→">Quiero info!</Button>
+    <Button href="#servicios" variant="secondary">Ver servicios y tarifas</Button>
+  </UnitHero>
+
+  <Section labelledby="enfoque-title">
+    <div class="enfoque-grid">
+      <div class="enfoque-copy">
+        <div id="enfoque-title">
+          <SectionHeading
+            eyebrow="Eres todo lo que puedes transformar"
+            title="Optimizar la productividad cuidando el corazón de la empresa: sus personas"
+            lead="En un mundo impulsado por contextos volátiles y la transformación digital, la clave del éxito radica en alcanzar el bienestar gestionando de manera asertiva las emociones y reconfigurando procesos."
+            accent={unit.solid}
+          />
+        </div>
+        <p>
+          Destinado a organizaciones y empresas que busquen implementar nuevas tecnologías, introducir mejoras en la cultura organizacional y transitar procesos de innovación de una manera saludable y sostenible.
+        </p>
+        <p>
+          <strong>¿Cuál es el impacto esperado en las empresas y organizaciones?</strong> Aumenta la productividad, fortalece la cultura, mejora la satisfacción y retención, facilita cambios duraderos e impulsa la innovación y la creatividad.
+        </p>
+      </div>
+      <div class="team-cards">
+        {
+          team.map((m) => (
+            <article class="card">
+              <h3>{m.name}</h3>
+              <p>{m.role}</p>
+              <a href={m.href} target="_blank" rel="noopener noreferrer">{m.linkLabel}</a>
+            </article>
+          ))
+        }
+        <article class="card cta-card">
+          <h3>Agendá tu Sesión de Diagnóstico Gratuita</h3>
+          <p>Coordinamos una videollamada al {contact.phoneDisplay} para definir la mejor estrategia de intervención y armar un presupuesto adaptado a tus posibilidades.</p>
+          <div><Button href={contact.whatsappHref} size="sm" iconRight="→">Quiero info!</Button></div>
+        </article>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="servicios" background="sky" labelledby="servicios-title">
+    <div id="servicios-title">
+      <SectionHeading
+        eyebrow="Servicios y modalidades"
+        title="Ninguno de nosotros es tan inteligente como todos nosotros juntos"
+        lead="Cocreamos una tecnología social innovadora que pone al bienestar en el centro de la estrategia."
+        accent={unit.solid}
+      />
+    </div>
+    <div class="pricing-grid">
+      {
+        pricing.map((p) => (
+          <article class="price-card">
+            <div class="duration">{p.duration}</div>
+            <h3>{p.name}</h3>
+            <p>{p.detail}</p>
+            <table>
+              <caption class="sr">{p.name}</caption>
+              <tbody>
+                {p.values.map((v) => (
+                  <tr>
+                    <th scope="row">{v.label}</th>
+                    <td>{v.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="steps-block">
+      <h3>Nuestros laboratorios sociales se estructuran así:</h3>
+      <ol class="steps-list">
+        {labSteps.map((s, i) => <li><StepItem n={i + 1} title={s.title} description={s.description} accent={unit.solid} /></li>)}
+      </ol>
+    </div>
+
+    <div class="topics-block">
+      <h3>Ejes de trabajo y entrenamiento</h3>
+      <ul class="tags-list">
+        {servicesList.map((s) => <li><Tag color={unit.solid}>{s}</Tag></li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="diagnostico" labelledby="diagnostico-title">
+    <div id="diagnostico-title">
+      <SectionHeading
+        eyebrow="Evaluación y métricas"
+        title="Diagnóstico e Indicadores Organizacionales"
+        lead="Medimos y acompañamos la evolución del equipo con herramientas específicas de observación, evaluación e intervención."
+        accent={unit.solid}
+      />
+    </div>
+    <div class="tools-grid">
+      {
+        toolCategories.map((t) => (
+          <article class="card">
+            <h3>{t.title}</h3>
+            <p>{t.items}</p>
+          </article>
+        ))
+      }
+    </div>
+    <div class="indicators-grid">
+      {
+        diagnosticIndicators.map((d) => (
+          <article class="card">
+            <h3>{d.group}</h3>
+            <ul>
+              {d.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="desafio-title">
+    <div class="desafio-box">
+      <div id="desafio-title">
+        <SectionHeading
+          eyebrow="Desafío Emprendedor · Gimnasio de Innovación"
+          title="Traé tu desafío y lo impulsamos con escucha y estrategia"
+          lead="Emprender no siempre es crecer. A veces es sostenerse, a veces es no soltar. Un espacio conducido por la Lic. Cecilia Vallejos y la Esp. María José Kiszka donde los casos reales se abordan desde las metodologías de innovación y el enfoque biopsicosocial."
+          accent={unit.solid}
+        />
+      </div>
+      <div class="desafio-actions">
+        <Button href="/stream/desafio-emprendedor" iconRight="→">Ver programa Desafío Emprendedor</Button>
+        <Button href={contact.whatsappHref} variant="secondary">Quiero info!</Button>
+      </div>
+    </div>
+  </Section>
+
+  <ContactBlock email={unit.email!} emailLabel="Interactiva Hub · INTEGRAPSIINN" accent={unit.solid} />
+</BaseLayout>
+
+<style>
+  .enfoque-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .enfoque-copy { display: grid; gap: 20px; }
+  .team-cards { display: grid; gap: 16px; }
+  .card {
+    border: 1px solid var(--line-1);
+    border-top: 6px solid var(--lab-3);
+    padding: 24px;
+    background: var(--paper-0);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .cta-card { background: var(--sky-0); }
+  h3 { font: var(--type-h3); color: var(--space-ink); margin: 0; }
+  p { font: 400 16px/1.55 var(--font-body); color: var(--ink-2); margin: 0; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+  .price-card {
+    border: 1px solid var(--line-1);
+    border-top: 6px solid var(--lab-3);
+    padding: 28px;
+    background: var(--paper-0);
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+  .duration { font: var(--type-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--lab-3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { padding: 10px 0; border-top: 1px solid var(--line-1); text-align: left; font: 400 16px/1.35 var(--font-body); }
+  td { text-align: right; font-weight: 700; color: var(--space-ink); white-space: nowrap; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .steps-block, .topics-block { margin-top: 48px; display: grid; gap: 20px; }
+  .steps-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .tags-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+  .indicators-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
+  .indicators-grid ul { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 6px; color: var(--ink-2); font: 400 15px/1.45 var(--font-body); }
+  .desafio-box { display: grid; gap: 24px; }
+  .desafio-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 960px) {
+    .enfoque-grid, .pricing-grid, .tools-grid, .indicators-grid, .steps-list { grid-template-columns: 1fr; }
+  }
+</style>

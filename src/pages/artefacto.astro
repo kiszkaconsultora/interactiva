@@ -1,0 +1,248 @@
+---
+import { withBase } from '../utils/url';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/core/Button.astro';
+import Tag from '../components/core/Tag.astro';
+import ContactBlock from '../components/marketing/ContactBlock.astro';
+import Section from '../components/marketing/Section.astro';
+import SectionHeading from '../components/marketing/SectionHeading.astro';
+import UnitHero from '../components/marketing/UnitHero.astro';
+import { unitBySlug } from '../data/units';
+import { contact } from '../data/site';
+
+const unit = unitBySlug('artefacto');
+
+const formInscripcion = 'https://forms.gle/54J2aXKE9HaGkam28';
+const formDocentes = 'https://forms.gle/ZAgD8WrBkWjbFCzg6';
+
+const spaces = [
+  {
+    name: 'Laboratorio Creativo',
+    text: 'Ideal para talleres de Cerámica, Dibujo, Pintura, Collage, Grabado, Serigrafía, Artes Gráficas, Música, Escritura y Lectura, Fotografía. Espacio limpio, iluminado y con superficies aptas.',
+  },
+  {
+    name: 'Aulas de Gestión y Crecimiento',
+    text: 'Perfecto para cursos de Idiomas, Emprendedurismo, Desarrollo Personal y Marketing. Clima profesional, comodidad y tecnología.',
+  },
+  {
+    name: 'Integración con Interactiva Hub',
+    text: 'Conectado de forma directa con todo el ecosistema de Interactiva Hub: donde las ideas crecen y escalan.',
+  },
+];
+
+const guarantees = [
+  {
+    title: 'Logística resuelta',
+    text: 'Espacios totalmente equipados con proyector, pizarras, equipo de audio, cocina completa y wifi de alta velocidad.',
+  },
+  {
+    title: 'Ambiente inspirador',
+    text: 'Un entorno que respira Industrias Culturales y Creativas, diseñado para que vivas una gran experiencia.',
+  },
+  {
+    title: 'Flexibilidad total',
+    text: 'Alquiler por horas, módulos o jornadas completas que se adaptan al calendario de tu modalidad de trabajo.',
+  },
+  {
+    title: 'Comunidad',
+    text: 'Te sumás a un ecosistema de profesionales donde pueden surgir colaboraciones únicas.',
+  },
+];
+
+const experiences = [
+  'Estampado',
+  'Fotografía',
+  'Collage',
+  'Ilustración',
+  'Diseño Transmedia',
+  'Escritura Creativa',
+  'Laboratorio de Espacios',
+  'Laboratorios de Creatividad',
+];
+
+const teacherModules = [
+  { label: 'Valor módulo (1:30 hs)', value: '$15.000.-' },
+  { label: 'Valor 4 veces por mes', value: '$60.000.-' },
+  { label: 'Retorno estimado con 4 alumnos', value: '$100.000.-' },
+  { label: 'Retorno estimado con 8 alumnos', value: '$260.000.-' },
+  { label: 'Retorno estimado con 12 alumnos', value: '$420.000.-' },
+];
+---
+
+<BaseLayout
+  title="Artefacto · Consultoría y Ecosistema · Interactiva Hub"
+  description="Tu laboratorio de arte, diseño y tecnología en Resistencia, Chaco. Experiencias que impulsan la cadena de valor de las Industrias Creativas y Culturales Chaqueñas."
+>
+  <UnitHero
+    title="ArteFacto"
+    eyebrow="Consultoría · Industrias Creativas y Culturales"
+    lead="Tu laboratorio de arte, diseño y tecnología. Experiencias que impulsan el desarrollo de la cadena de valor de Industrias Creativas y Culturales Chaqueñas."
+    logo={unit.logo}
+    logoAlt="Logo de ArteFacto"
+    accent={unit.accent}
+  >
+    <Button href={contact.whatsappHref} iconRight="→">Quiero info!</Button>
+    <Button href="#docentes" variant="secondary">Propuesta para docentes</Button>
+  </UnitHero>
+
+  <Section labelledby="propuesta-title">
+    <div class="intro-grid">
+      <div class="intro-copy">
+        <div id="propuesta-title">
+          <SectionHeading
+            eyebrow="Viví la experiencia Artefacto"
+            title="Un ecosistema que fusiona investigación, experimentación y producción"
+            accent={unit.solid}
+          />
+        </div>
+        <div class="cards-3">
+          {
+            spaces.map((s) => (
+              <article class="card">
+                <h3>{s.name}</h3>
+                <p>{s.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+      <img
+        class="room-photo"
+        src={withBase('/images/coworking/sala-artefacto.webp')}
+        alt="Sala Artefacto equipada para talleres creativos"
+        loading="lazy"
+      />
+    </div>
+  </Section>
+
+  <Section background="sky" labelledby="garantias-title">
+    <div id="garantias-title">
+      <SectionHeading eyebrow="Qué incluye" title="Garantizamos" accent={unit.solid} />
+    </div>
+    <div class="cards-4">
+      {
+        guarantees.map((g) => (
+          <article class="card">
+            <h3>{g.title}</h3>
+            <p>{g.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section labelledby="experiencias-title">
+    <div id="experiencias-title">
+      <SectionHeading
+        eyebrow="Talleres y laboratorios"
+        title="Experiencias Artefacto"
+        lead="Propuestas formativas y de experimentación abiertas a la comunidad creativa."
+        accent={unit.solid}
+      />
+    </div>
+    <ul class="exp-list">
+      {experiences.map((e) => <li><Tag color={unit.solid}>{e}</Tag></li>)}
+    </ul>
+    <div class="section-actions">
+      <Button href={formInscripcion} iconRight="→">Inscribirme a una experiencia</Button>
+    </div>
+  </Section>
+
+  <Section id="docentes" background="sky" labelledby="docentes-title">
+    <div class="docentes-grid">
+      <div class="docentes-copy">
+        <div id="docentes-title">
+          <SectionHeading
+            eyebrow="Convocatoria abierta"
+            title="¿Sos docente, artista o creativo y buscás el lugar ideal para dictar tus cursos?"
+            lead="Un espacio diseñado para impulsar las Industrias Culturales y Creativas. Espacios totalmente equipados para enseñar, crear y conectar."
+            accent={unit.solid}
+          />
+        </div>
+        <p>
+          Te presentamos los módulos distribuidos en la semana con una duración de <strong>1:30 hs</strong> para aprovechar al máximo el rendimiento del encuentro y con <strong>exclusividad del espacio</strong> para vos y tu grupo de talleristas.
+        </p>
+        <p class="highlight">
+          No pedimos comisiones por la cantidad de alumnos: el éxito de tu actividad es tu mérito, por ello si se completa la clase, es tu beneficio.
+        </p>
+        <div class="section-actions">
+          <Button href={formDocentes} iconRight="→">Gestionar mi módulo de trabajo</Button>
+          <Button href={contact.whatsappHref} variant="secondary">Quiero info!</Button>
+        </div>
+      </div>
+      <div class="pricing-box">
+        <div class="promo-badge">Oferta de módulos para profes · Promo primeros 8</div>
+        <table>
+          <caption class="sr">Valores y retornos por módulo en Artefacto</caption>
+          <tbody>
+            {
+              teacherModules.map((m) => (
+                <tr>
+                  <th scope="row">{m.label}</th>
+                  <td>{m.value}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </Section>
+
+  <ContactBlock email={unit.email!} emailLabel="Interactiva Hub · Artefacto" accent={unit.solid} />
+</BaseLayout>
+
+<style>
+  .intro-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .room-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+  .cards-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+  .cards-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+  .card {
+    border: 1px solid var(--line-1);
+    border-top: 6px solid var(--cowork-2);
+    padding: 24px;
+    background: var(--paper-0);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  h3 { font: var(--type-h3); color: var(--space-ink); margin: 0; }
+  p { font: 400 16px/1.55 var(--font-body); color: var(--ink-2); margin: 0; }
+  .exp-list { list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+  .section-actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .docentes-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .docentes-copy { display: grid; gap: 18px; }
+  .highlight {
+    padding: 16px 20px;
+    background: var(--paper-0);
+    border-left: 4px solid var(--cowork-2);
+    color: var(--space-ink);
+    font-weight: 500;
+  }
+  .pricing-box {
+    background: var(--paper-0);
+    border: 1px solid var(--line-1);
+    border-top: 6px solid var(--cowork-2);
+    padding: 28px;
+    display: grid;
+    gap: 16px;
+  }
+  .promo-badge {
+    font: var(--type-eyebrow);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cowork-2);
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 12px 0; border-top: 1px solid var(--line-1); text-align: left; font: 400 16px/1.35 var(--font-body); }
+  td { text-align: right; font-weight: 700; color: var(--space-ink); white-space: nowrap; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  @media (max-width: 1024px) {
+    .cards-3, .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .intro-grid, .docentes-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .cards-3, .cards-4 { grid-template-columns: 1fr; }
+  }
+</style>
