@@ -31,38 +31,49 @@ const unit = unitBySlug('coworking');
 
   <Section labelledby="salas-title">
     <div id="salas-title">
-      <SectionHeading eyebrow="Salas y tarifas" title="Elegí tu espacio" lead={priceNote} accent={unit.solid} />
+      <SectionHeading
+        eyebrow="Salas y tarifas"
+        title="Elegí tu espacio"
+        lead={`${priceNote}. El beneficio del 20% de descuento aplica a quienes contratan paquetes mensuales de jornadas o participan activamente de los programas, entrenamientos e instituciones aliadas de Interactiva Hub.`}
+        accent={unit.solid}
+      />
     </div>
     <div class="rooms">
       {
-        rooms.map((r) => (
-          <article class="room" id={r.id}>
-            <img src={withBase(r.image)} alt={r.imageAlt} loading="lazy" />
-            <div class="room-body">
-              <h3>{r.name}</h3>
-              {r.capacity && <p class="capacity">Capacidad: {r.capacity}</p>}
-              {r.equipment && <p>{r.equipment}</p>}
-              {r.description && <p>{r.description}</p>}
-              {r.notes?.map((n) => <p>{n}</p>)}
-              {
-                r.prices && (
-                  <table>
-                    <caption class="sr">Valor por {r.name}</caption>
-                    <tbody>
-                      {r.prices.map((p) => (
-                        <tr>
-                          <th scope="row">{p.label}{p.note && <small>{p.note}</small>}</th>
-                          <td>{p.price}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )
-              }
-              {r.pdf && <Button href={r.pdf} variant="secondary" size="sm" iconRight="→">Ver espacio</Button>}
-            </div>
-          </article>
-        ))
+        rooms.map((r) => {
+          const reserveHref = `https://wa.me/543624261185?text=${encodeURIComponent(`Hola! Vengo desde la web de Interactiva Hub y quiero consultar disponibilidad para reservar ${r.name}.`)}`;
+          return (
+            <article class="room" id={r.id}>
+              <img src={withBase(r.image)} alt={r.imageAlt} loading="lazy" />
+              <div class="room-body">
+                <h3>{r.name}</h3>
+                {r.capacity && <p class="capacity">Capacidad: {r.capacity}</p>}
+                {r.equipment && <p>{r.equipment}</p>}
+                {r.description && <p>{r.description}</p>}
+                {r.notes?.map((n) => <p>{n}</p>)}
+                {
+                  r.prices && (
+                    <table>
+                      <caption class="sr">Valor por {r.name}</caption>
+                      <tbody>
+                        {r.prices.map((p) => (
+                          <tr>
+                            <th scope="row">{p.label}{p.note && <small>{p.note}</small>}</th>
+                            <td>{p.price}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )
+                }
+                <div class="room-actions">
+                  <Button href={reserveHref} size="sm" iconRight="→">Reservar esta sala</Button>
+                  {r.pdf && <Button href={r.pdf} variant="secondary" size="sm" iconRight="→">Ver espacio</Button>}
+                </div>
+              </div>
+            </article>
+          );
+        })
       }
     </div>
   </Section>
@@ -90,6 +101,7 @@ const unit = unitBySlug('coworking');
   .room:nth-child(even) img { order: 2; }
   .room img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
   .room-body { display: grid; gap: 14px; justify-items: start; width: 100%; }
+  .room-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
   h3 { font: var(--type-h3); color: var(--space-ink); }
   p { font: 400 16px/1.5 var(--font-body); color: var(--ink-2); }
   .capacity { font-weight: 500; color: var(--space-ink); }
